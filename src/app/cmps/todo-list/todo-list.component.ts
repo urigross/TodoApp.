@@ -1,12 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Todo } from 'src/app/services/todo/todo.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Todo } from 'src/app/models/todo.model';
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent implements OnInit {
-@Input() todos: Todo[];
+@Input() todos: Todo[]|null;
+@Output() onSelectTodo = new EventEmitter<string>()
+@Output() onIdToRemove = new EventEmitter<string>()
   constructor() { }
 
   ngOnInit(): void {

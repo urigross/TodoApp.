@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Todo } from 'src/app/services/todo/todo.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Todo } from 'src/app/models/todo.model';
+
 
 @Component({
   selector: 'app-todo-preview',
@@ -8,8 +9,14 @@ import { Todo } from 'src/app/services/todo/todo.model';
 })
 export class TodoPreviewComponent implements OnInit {
   @Input() todo:Todo;
+  @Output() onSelectTodo = new EventEmitter<string>()
+  @Output() onIdToRemove = new EventEmitter<string>()
 
   constructor() { }
+  onClickToEdit(){
+    console.log(this.todo.title);
+  }
+
 
   ngOnInit(): void {
   }

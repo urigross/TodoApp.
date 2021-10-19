@@ -1,2 +1,5 @@
-<input type="text" placeholder="Add your new todo">
-<app-todo-list [todos]="todos"></app-todo-list>
+<section>
+    <app-todo-filter></app-todo-filter>
+    <input type="text" placeholder="Add your new todo">
+    <app-todo-list [todos]="todos" (onSelectTodo)="selectTodoId=$event" (onIdToRemove)="onIdToRemove($event)"></app-todo-list>
+</section>

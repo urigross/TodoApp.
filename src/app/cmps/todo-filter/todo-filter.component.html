@@ -1,0 +1,4 @@
+<form class="todo-filter">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="term" [(ngModel)]="filterBy.term" (ngModelChange)="onSetFilter()" placeholder="Search title">
+</form>

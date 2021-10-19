@@ -7,6 +7,8 @@ import { HeaderComponent } from './cmps/header/header.component';
 import { FooterComponent } from './cmps/footer/footer.component';
 import { TodoListComponent } from './cmps/todo-list/todo-list.component';
 import { TodoPreviewComponent } from './cmps/todo-preview/todo-preview.component';
+import { TodoFilterComponent } from './cmps/todo-filter/todo-filter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,10 +18,12 @@ import { TodoPreviewComponent } from './cmps/todo-preview/todo-preview.component
     FooterComponent,
     TodoListComponent,
     TodoPreviewComponent,
+    TodoFilterComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

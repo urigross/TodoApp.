@@ -1,6 +1,5 @@
-<section class="todo-list">
-    <ul>
-        <app-todo-preview *ngFor="let todo of todos" [todo]="todo"></app-todo-preview>
-    </ul>
-</section>
+<div class="todo-list">
+    <app-todo-preview *ngFor="let todo of todos; index as idx" [todo]="todo" 
+    (onSelectTodo)="onSelectTodo.emit($event)" (onIdToRemove)="onIdToRemove.emit($event)"></app-todo-preview>
+</div>
 

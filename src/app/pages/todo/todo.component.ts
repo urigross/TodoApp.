@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo } from 'src/app/services/todo/todo.model';
+import { Observable, Subscription } from 'rxjs';
+import { Todo } from 'src/app/models/todo.model';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -7,31 +9,24 @@ import { Todo } from 'src/app/services/todo/todo.model';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  x = '';
-  todos: Todo[] = [{
-    _id:'rwr32',
-    title: 'Make a todo app',
-    date: new Date('10/10/2021'),
-    isDone: false,
-  },
-  {
-    _id:'te906',
-    title: 'Go surfing',
-    date: new Date('1/9/2018'),
-    isDone: true,
-  },
-  {
-    _id:'rwr32',
-    title: 'Go on a vication',
-    date: new Date('5/5/2022'),
-    isDone: false,
-  },
-]
-
-  constructor() { }
+  // todos$: Observable<Todo[]>;
+  public todos: Todo[];
+  subscription: Subscription;
+  selectTodoId: string;
+  constructor(private todoService: TodoService) { }
+  onIdToRemove(data:string){
+    this.todoService.remove(data);
+  }
 
   ngOnInit(): void {
-    this.x='1';
+    this.subscription = this.todoService.todos$.subscribe(todos => this.todos = todos)
+    this.todoService.query();
+    // this.todos$ = this.todoService.todos$;
+
+
+  }
+  ngOnDestroy(): void{
+    this.subscription.unsubscribe();
   }
 
 }
