@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { SortBy } from 'src/app/models/sortBy.model';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
 
@@ -14,8 +15,12 @@ export class TodoComponent implements OnInit {
   subscription: Subscription;
   selectTodoId: string;
   constructor(private todoService: TodoService) { }
-  onIdToRemove(data:string){
+
+  onIdToRemove(data:string):void {
     this.todoService.remove(data);
+  }
+  onToggleSort(term:string):void{
+    this.todoService.setSort(term);
   }
 
   ngOnInit(): void {

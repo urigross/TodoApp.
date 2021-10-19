@@ -39,7 +39,7 @@ export class TodoService {
     if (term === "title"){
     }
   }
-
+  
   public query():void{
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
@@ -49,24 +49,6 @@ export class TodoService {
     }
     this._todos$.next(this._sort(todos, sortBy))
   }
-
-  private _filter(todos:Todo[], term:string){
-    term = term.toLocaleLowerCase();
-    return todos.filter(todo=> todo.title.toLocaleLowerCase().includes(term))
-  }
-
-  private _sortByTitle(todos: Todo[] ,isAccending:boolean): Todo[]{
-    return todos.sort((a,b)=>{
-      if(a.title.toLocaleLowerCase() < b.title.toLocaleLowerCase()) return isAccending? -1 : 1 ;
-      if(a.title.toLocaleLowerCase() > b.title.toLocaleLowerCase()) return isAccending? 1: -1;
-      return 0;
-    })
-  }
-  // TODO:learn how to make this more effective
-  private _sort(todos: Todo[], sortBy:SortBy): Todo[]{
-    if(sortBy.term === "title") return this._sortByTitle(todos,sortBy.isAccending)
-    else return this._sortByTitle(todos,sortBy.isAccending);
-  }
   
   public remove(todoId: string):void{
     const todos = this._todosDB;
@@ -74,11 +56,48 @@ export class TodoService {
     todos.splice(todoIdx,1);
     this._todos$.next(todos) // update the db after modding.
   }
-
   // Filtering
-  public setFilter(filterBy:FilterBy){
+  public setFilter(filterBy:FilterBy):void{
     this._filterBy$.next(filterBy)
     this.query();
   }
+  private _filter(todos:Todo[], term:string){
+    term = term.toLocaleLowerCase();
+    return todos.filter(todo=> todo.title.toLocaleLowerCase().includes(term))
+  }
+
+  // Sorting 
+  public setSort( term:string ):void{
+    const sortBy:SortBy = this._sortBy$.getValue();
+    // If the term is being presses more that once - Change sorting direction
+    if( term === sortBy.term){
+      sortBy.isAccending = !sortBy.isAccending;
+    }
+    //Else - Choose another sorting term
+    else{
+      sortBy.term = term;
+      sortBy.isAccending = true;
+    }
+    this._sortBy$.next(sortBy);
+    this.query();
+  }
+  private _sortByTitle(todos: Todo[] ,sortBy:SortBy): Todo[]{
+    if(sortBy.term){
+      return todos.sort((a,b)=>{
+        var term: any = sortBy.term;
+        if((a as any)[term].toLocaleLowerCase() < (b as any)[term].toLocaleLowerCase()) return sortBy.isAccending? -1 : -1 ;
+        if((a as any)[term].toLocaleLowerCase() > (b as any)[term].toLocaleLowerCase()) return sortBy.isAccending? 1: -1;
+        return 0;
+      })
+    }
+    return todos;
+  }
+  // TODO:learn how to make this more effective
+  private _sort(todos: Todo[], sortBy:SortBy): Todo[]{
+    if(sortBy.term === "title") return this._sortByTitle(todos,sortBy)
+    else return this._sortByTitle(todos,sortBy);
+  }
+  
+
 
 }
