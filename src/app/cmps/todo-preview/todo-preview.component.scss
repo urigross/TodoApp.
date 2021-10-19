@@ -1,9 +1,11 @@
-.todo-preview.done {
-	text-decoration: line-through;
-}
-ul{
+.todo-preview{
     display: flex;
     gap: 60px;
+    margin-bottom: 10px;
+}
+
+.todo-preview.done {
+    text-decoration: line-through;
 }
 
 .todo-content{
@@ -12,8 +14,10 @@ ul{
 
 .todo-date{
     width: 200px;
+
 }
 
 .todo-status{
     width: 130px;
+
 }

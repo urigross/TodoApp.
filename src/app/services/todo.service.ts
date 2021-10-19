@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { FilterBy } from '../models/filterBy.model';
+import { SortBy } from '../models/sortBy.model';
 import { Todo } from '../models/todo.model';
 
 const TODOS: Todo[] = [
@@ -25,6 +26,8 @@ export class TodoService {
   private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '' });
   public filterBy$ = this._filterBy$.asObservable();
 
+  private _sortBy$ = new BehaviorSubject<SortBy>({term:'', isAccending:true});
+  public sortBy$ = this._sortBy$.asObservable();
 
   // public query() {
   //   const filterBy:FilterBy = this._filterBy$.getValue();
@@ -32,13 +35,19 @@ export class TodoService {
   //   this._todos$.next(todos);
   // }
 
-  public query(){
+  public setSortBy(term:string, isAccending:boolean):void{
+    if (term === "title"){
+    }
+  }
+
+  public query():void{
     const filterBy = this._filterBy$.getValue();
+    const sortBy = this._sortBy$.getValue();
     let todos:Todo[] = this._todosDB;
     if ( filterBy && filterBy.term) {
       todos = this._filter(todos, filterBy.term)
     }
-    this._todos$.next(this._sort(todos))
+    this._todos$.next(this._sort(todos, sortBy))
   }
 
   private _filter(todos:Todo[], term:string){
@@ -46,12 +55,17 @@ export class TodoService {
     return todos.filter(todo=> todo.title.toLocaleLowerCase().includes(term))
   }
 
-  private _sort(todos: Todo[]): Todo[]{
+  private _sortByTitle(todos: Todo[] ,isAccending:boolean): Todo[]{
     return todos.sort((a,b)=>{
-      if(a.title.toLocaleLowerCase() < b.title.toLocaleLowerCase()) return -1;
-      if(a.title.toLocaleLowerCase() > b.title.toLocaleLowerCase()) return 1;
+      if(a.title.toLocaleLowerCase() < b.title.toLocaleLowerCase()) return isAccending? -1 : 1 ;
+      if(a.title.toLocaleLowerCase() > b.title.toLocaleLowerCase()) return isAccending? 1: -1;
       return 0;
     })
+  }
+  // TODO:learn how to make this more effective
+  private _sort(todos: Todo[], sortBy:SortBy): Todo[]{
+    if(sortBy.term === "title") return this._sortByTitle(todos,sortBy.isAccending)
+    else return this._sortByTitle(todos,sortBy.isAccending);
   }
   
   public remove(todoId: string):void{
@@ -61,6 +75,7 @@ export class TodoService {
     this._todos$.next(todos) // update the db after modding.
   }
 
+  // Filtering
   public setFilter(filterBy:FilterBy){
     this._filterBy$.next(filterBy)
     this.query();

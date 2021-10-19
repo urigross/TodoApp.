@@ -1,0 +1,30 @@
+.todo-app-container{
+    margin-top: 55px;
+    input{
+        margin-bottom: 10px;
+    }
+}
+
+
+.sort-btn-container {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 10px;
+
+}
+
+.content-btn {
+    width: 400px;
+}
+
+.date-btn {
+    width: 200px;
+}
+
+.status-btn {
+    width: 130px;
+}
+
+.importance-btn {
+    width: 90px;
+}

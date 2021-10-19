@@ -15,7 +15,6 @@ export class TodoFilterComponent implements OnInit {
 
   constructor(private todoService: TodoService) { }
   onSetFilter():void{
-    console.log('this filter',this.filterBy)
     this.todoService.setFilter(this.filterBy)
   }
 

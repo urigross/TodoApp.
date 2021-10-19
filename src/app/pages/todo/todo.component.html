@@ -1,5 +1,11 @@
-<section>
+<section class="todo-app-container max-width">
     <app-todo-filter></app-todo-filter>
     <input type="text" placeholder="Add your new todo">
+    <div class="sort-btn-container">
+        <button class="content-btn">^^</button>
+        <button class="date-btn">^^</button>
+        <button class="status-btn">^^</button>
+        <button class="importance-btn">^^</button>
+    </div>
     <app-todo-list [todos]="todos" (onSelectTodo)="selectTodoId=$event" (onIdToRemove)="onIdToRemove($event)"></app-todo-list>
 </section>
