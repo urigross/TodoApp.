@@ -17,7 +17,6 @@ export class TodoFilterComponent implements OnInit {
   onSetFilter():void{
     this.todoService.setFilter(this.filterBy)
   }
-
   ngOnInit(): void {
     this.subscription = this.todoService.filterBy$.subscribe(filterBy=>{
       this.filterBy = filterBy;
@@ -26,5 +25,4 @@ export class TodoFilterComponent implements OnInit {
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
-
 }

@@ -5,13 +5,11 @@ import { Todo } from 'src/app/models/todo.model';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent{
 @Input() todos: Todo[]|null;
 @Output() onSelectTodo = new EventEmitter<string>()
 @Output() onIdToRemove = new EventEmitter<string>()
-  constructor() { }
-
-  ngOnInit(): void {
+  trackByFn(idx:any, todo: Todo){
+    return todo._id; 
   }
-  
 }

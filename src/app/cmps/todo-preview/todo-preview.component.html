@@ -1,8 +1,10 @@
-<ul class="todo-preview" *ngIf="todo" (click)="onSelectTodo.emit(todo._id)" class=" todo {{ (todo.isDone ? 'done' : '') }}">
-    <li class="todo-content">Title: {{todo.title}}</li>
-    <li class="todo-date" (click)="onClickToEdit()">Created: {{todo.date | date:'short' }}</li>
+<!-- detailed todo with edit btn -->
+<ul class="todo-preview" *ngIf="todo" class=" todo {{ (todo.isDone ? 'done' : '') }}">
+    <li class="todo-content" (click)="onClickToEdit()">Title: {{todo.title}}</li>
+    <li class="todo-date">Created: {{todo.date | date:'short' }}</li>
     <li class="todo-status">Todo status: {{todo.isDone? "Done":"Active"}}</li>
     <li>Importance: {{todo.importance}}</li>
+    <!-- remove btn -->
     <button (click)="onIdToRemove.emit(todo._id)">Remove todo</button>
 </ul>
 
