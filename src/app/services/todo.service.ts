@@ -5,9 +5,9 @@ import { SortBy } from '../models/sortBy.model';
 import { Todo } from '../models/todo.model';
 
 const TODOS: Todo[] = [
-  {_id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance:1},
-  {_id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance:2},
-  {_id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance:3},
+  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1 },
+  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2 },
+  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 },
 ]
 
 @Injectable({
@@ -26,7 +26,7 @@ export class TodoService {
   private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '' });
   public filterBy$ = this._filterBy$.asObservable();
 
-  private _sortBy$ = new BehaviorSubject<SortBy>({term:'', isAccending:true});
+  private _sortBy$ = new BehaviorSubject<SortBy>({ term: '', isAccending: true });
   public sortBy$ = this._sortBy$.asObservable();
 
   // public query() {
@@ -35,69 +35,91 @@ export class TodoService {
   //   this._todos$.next(todos);
   // }
 
-  public setSortBy(term:string, isAccending:boolean):void{
-    if (term === "title"){
+  public setSortBy(term: string, isAccending: boolean): void {
+    if (term === "title") {
     }
   }
-  
-  public query():void{
+
+  public query(): void {
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
-    let todos:Todo[] = this._todosDB;
-    if ( filterBy && filterBy.term) {
+    let todos: Todo[] = this._todosDB;
+    if (filterBy && filterBy.term) {
       todos = this._filter(todos, filterBy.term)
     }
     this._todos$.next(this._sort(todos, sortBy))
   }
-  
-  public remove(todoId: string):void{
+
+  public remove(todoId: string): void {
     const todos = this._todosDB;
     const todoIdx = todos.findIndex(todo => todo._id === todoId)
-    todos.splice(todoIdx,1);
+    todos.splice(todoIdx, 1);
     this._todos$.next(todos) // update the db after modding.
   }
   // Filtering
-  public setFilter(filterBy:FilterBy):void{
+  public setFilter(filterBy: FilterBy): void {
     this._filterBy$.next(filterBy)
     this.query();
   }
-  private _filter(todos:Todo[], term:string){
+  private _filter(todos: Todo[], term: string) {
     term = term.toLocaleLowerCase();
-    return todos.filter(todo=> todo.title.toLocaleLowerCase().includes(term))
+    return todos.filter(todo => todo.title.toLocaleLowerCase().includes(term))
   }
 
   // Sorting 
-  public setSort( term:string ):void{
-    const sortBy:SortBy = this._sortBy$.getValue();
+  public setSort(term: string): void {
+    const sortBy: SortBy = this._sortBy$.getValue();
     // If the term is being presses more that once - Change sorting direction
-    if( term === sortBy.term){
+    if (term === sortBy.term) {
       sortBy.isAccending = !sortBy.isAccending;
     }
     //Else - Choose another sorting term
-    else{
+    else {
       sortBy.term = term;
       sortBy.isAccending = true;
     }
     this._sortBy$.next(sortBy);
     this.query();
   }
-  private _sortByTitle(todos: Todo[] ,sortBy:SortBy): Todo[]{
-    if(sortBy.term){
-      return todos.sort((a,b)=>{
-        var term: any = sortBy.term;
-        if((a as any)[term].toLocaleLowerCase() < (b as any)[term].toLocaleLowerCase()) return sortBy.isAccending? -1 : -1 ;
-        if((a as any)[term].toLocaleLowerCase() > (b as any)[term].toLocaleLowerCase()) return sortBy.isAccending? 1: -1;
-        return 0;
-      })
-    }
-    return todos;
+  // private _sortByTitle(todos: Todo[] ,sortBy:SortBy): Todo[]{
+  //   if(sortBy.term){
+  //     return todos.sort((a,b)=>{
+  //       var term: any = sortBy.term;
+  //       if((a as any)[term].toLocaleLowerCase() < (b as any)[term].toLocaleLowerCase()) return sortBy.isAccending? -1 : -1 ;
+  //       if((a as any)[term].toLocaleLowerCase() > (b as any)[term].toLocaleLowerCase()) return sortBy.isAccending? 1: -1;
+  //       return 0;
+  //     })
+  //   }
+  //   return todos;
+  // }
+
+  private _sortByTitle(todos: Todo[], isAccending: boolean): Todo[] {
+    return todos.sort((a, b) => {
+      if (a.title.toLocaleLowerCase() < b.title.toLocaleLowerCase()) return isAccending ? -1 : 1;
+      if (a.title.toLocaleLowerCase() > b.title.toLocaleLowerCase()) return isAccending ? 1 : -1;
+      return 0;
+    })
+  }
+  private _sortByNumer(todos: Todo[], sortBy:SortBy): Todo[] {
+    return todos.sort((a, b) => {
+      if ((a as any)[sortBy.term] < (b as any)[sortBy.term]) return sortBy.isAccending ? -1 : 1;
+      if (a.date > b.date) return sortBy.isAccending ? 1 : -1;
+      return 0;
+    })
+  }
+  private _sortByBoolean(todos:Todo[], sortBy:SortBy): Todo[] {
+    return todos.sort((a,b)=>{
+      return (a.isDone === b.isDone)? 0: a.isDone?  sortBy.isAccending? 1: -1 : sortBy.isAccending? -1 : 1;
+    })
   }
   // TODO:learn how to make this more effective
-  private _sort(todos: Todo[], sortBy:SortBy): Todo[]{
-    if(sortBy.term === "title") return this._sortByTitle(todos,sortBy)
-    else return this._sortByTitle(todos,sortBy);
+  private _sort(todos: Todo[], sortBy: SortBy): Todo[] {
+    if (sortBy.term === "title") return this._sortByTitle(todos, sortBy.isAccending)
+    if (sortBy.term === "date") return this._sortByNumer(todos, sortBy)
+    if (sortBy.term === "isDone") return this._sortByBoolean(todos, sortBy)    
+    else return this._sortByTitle(todos, sortBy.isAccending);
   }
-  
+
 
 
 }

@@ -3,9 +3,9 @@
     <input type="text" placeholder="Add your new todo">
     <div class="sort-btn-container">
         <button class="content-btn" (click)="onToggleSort('title')">^^</button>
-        <button class="date-btn">^^</button>
-        <button class="status-btn">^^</button>
-        <button class="importance-btn">^^</button>
+        <button class="date-btn" (click)="onToggleSort('date')">^^</button>
+        <button class="status-btn" (click)="onToggleSort('isDone')">^^</button>
+        <button class="importance-btn"(click)="onToggleSort('importance')">^^</button>
     </div>
     <app-todo-list [todos]="todos" (onSelectTodo)="selectTodoId=$event" (onIdToRemove)="onIdToRemove($event)"></app-todo-list>
 </section>
