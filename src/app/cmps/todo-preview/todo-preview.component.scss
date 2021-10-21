@@ -1,13 +1,26 @@
 .todo-preview-container{
     display: flex;
     gap: 35px;
-    ul{
+    .preview-ctr{
         display: flex;
-        gap: 35px;
-        margin-bottom: 30px;
+        padding: 10px;
+    box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    height: 47px;
+    line-height: 28px;
+}
+
+ul{
+    font-size: 18px;
+    display: flex;
+    gap: 35px;
+    margin-bottom: 30px;
+    
     }
     button{
-        width: 100px;
+        width: 80px;
         height: 28px;
     }
 }
@@ -16,13 +29,13 @@
     text-decoration: line-through;
 }
 .todo-content{
-    width: 400px;
+    width: 350px;
 }
 .todo-date{
-    width: 200px;
+    width: 250px;
 }
 .todo-status{
-    width: 130px;
+    width: 140px;
 }
 .todo-importance{
     width: 100px;
