@@ -9,6 +9,7 @@ import { TodoListComponent } from './cmps/todo-list/todo-list.component';
 import { TodoPreviewComponent } from './cmps/todo-preview/todo-preview.component';
 import { TodoFilterComponent } from './cmps/todo-filter/todo-filter.component';
 import { FormsModule } from '@angular/forms';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     TodoListComponent,
     TodoPreviewComponent,
     TodoFilterComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

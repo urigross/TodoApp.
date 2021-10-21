@@ -5,3 +5,14 @@
         line-height: 100px;
     }
 }
+
+nav {
+    padding: 10px;
+    display: flex;
+    grid-gap: 20px;
+    & > .active {
+      color: red;
+      font-weight: bold;
+    }
+  }
+  
