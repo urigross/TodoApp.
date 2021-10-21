@@ -1,8 +1,17 @@
-.todo-preview{
+.todo-preview-container{
     display: flex;
-    gap: 60px;
-    margin-bottom: 10px;
+    gap: 35px;
+    ul{
+        display: flex;
+        gap: 35px;
+        margin-bottom: 30px;
+    }
+    button{
+        width: 100px;
+        height: 28px;
+    }
 }
+
 .todo-preview.done {
     text-decoration: line-through;
 }
@@ -15,3 +24,7 @@
 .todo-status{
     width: 130px;
 }
+.todo-importance{
+    width: 100px;
+}
+
