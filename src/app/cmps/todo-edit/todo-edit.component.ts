@@ -11,6 +11,7 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class TodoEditComponent {
   @Input() todo:Todo;
+  @Input() ngValue:any;
   @Output() onCloseEdit = new EventEmitter<boolean>()
   subscription: Subscription;
   errMsg: string = '';

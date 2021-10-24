@@ -4,7 +4,17 @@
     <!-- <label for="title">Title</label>
     <input type="text" id="title" [(ngModel)]="todo.title" name="title"> -->
     <label for="importance">Importance</label>
-    <input type="number" id="importance" [(ngModel)]="todo.importance" name="importance">
+    <!-- <input type="number" id="importance" [(ngModel)]="todo.importance" name="importance"> -->
+    <select name="importance" id="importance" [(ngModel)]="todo.importance">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+    <label for="importance">Todo status</label>
+    <select name="isDone" id="isDone" [(ngModel)]="todo.isDone">
+        <option [ngValue]="true">Done</option>
+        <option [ngValue]="false">Active</option>
+    </select>
 
     <button>Save</button>
 </form>
