@@ -23,5 +23,7 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
     this.todoService.query();
     this.todos$ = this.todoService.todos$;
+
+    
   }
 }

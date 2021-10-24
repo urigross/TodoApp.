@@ -10,6 +10,7 @@ import { TodoPreviewComponent } from './cmps/todo-preview/todo-preview.component
 import { TodoFilterComponent } from './cmps/todo-filter/todo-filter.component';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './pages/about/about.component';
+import { TodoEditComponent } from './cmps/todo-edit/todo-edit.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AboutComponent } from './pages/about/about.component';
     TodoPreviewComponent,
     TodoFilterComponent,
     AboutComponent,
+    TodoEditComponent,
   ],
   imports: [
     BrowserModule,

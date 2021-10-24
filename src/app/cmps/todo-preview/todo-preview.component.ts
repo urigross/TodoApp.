@@ -5,12 +5,22 @@ import { Todo } from 'src/app/models/todo.model';
   templateUrl: './todo-preview.component.html',
   styleUrls: ['./todo-preview.component.scss']
 })
-export class TodoPreviewComponent{
+export class TodoPreviewComponent implements OnInit{
 
   @Input() todo:Todo;
   @Output() onIdToRemove = new EventEmitter<string>()
+  isEditOff:boolean;
+
+  ngOnInit(){
+    this.isEditOff = true;
+
+  }
 
   onClickToEdit(){
-    console.log(this.todo.title);
+    this.isEditOff = false;
   }  
+
+  onCloseEdit(data:boolean){
+    this.isEditOff = data;
+  }
 }
