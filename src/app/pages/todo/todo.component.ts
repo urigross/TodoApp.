@@ -11,6 +11,7 @@ import { TodoService } from 'src/app/services/todo.service';
 export class TodoComponent implements OnInit {
   todos$: Observable<Todo[]>;
   subscription: Subscription;
+  emptyTodo: Todo;
 
   constructor(private todoService: TodoService) { }
 
@@ -23,6 +24,7 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
     this.todoService.query();
     this.todos$ = this.todoService.todos$;
+    this.emptyTodo = this.todoService.getEmptyTodo();
 
     
   }

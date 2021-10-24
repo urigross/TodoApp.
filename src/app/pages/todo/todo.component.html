@@ -2,7 +2,7 @@
     <!-- filter -->
     <app-todo-filter></app-todo-filter>
     <!-- add btn -->
-    <input type="text" placeholder="Add your new todo">
+    <app-todo-edit [todo]="emptyTodo"></app-todo-edit>
     <!-- sorting btns -->
     <div class="sort-btn-container">
         <button class="content-btn" (click)="onToggleSort('title')">↑↓</button>

@@ -11,14 +11,15 @@ const TODOS: Todo[] = [
   { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3 },
   { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
 ]
+
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
   private _todosDB: Todo[] = TODOS;
-  // this is BehiorSubject - we can to .next to him
+  // this is BehaviorSubject - Can get .next 
   private _todos$ = new BehaviorSubject<Todo[]>([])
-  // this is an Obrervable - we CANNOT do .next to it but we can do all the other operations 
+  // this is an Obrervable - we CANNOT do .next.
   // It acts like a getter - You can list to it's changes
   // this makes a good seperation!
   public todos$ = this._todos$.asObservable();

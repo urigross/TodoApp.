@@ -9,7 +9,7 @@ import { TodoService } from 'src/app/services/todo.service';
   templateUrl: './todo-edit.component.html',
   styleUrls: ['./todo-edit.component.scss']
 })
-export class TodoEditComponent implements OnInit {
+export class TodoEditComponent {
   @Input() todo:Todo;
   @Output() onCloseEdit = new EventEmitter<boolean>()
   subscription: Subscription;
@@ -20,20 +20,13 @@ export class TodoEditComponent implements OnInit {
   constructor(private route: ActivatedRoute, private todoService: TodoService) { }
   async onSave(){
     try {
-      await this.todoService.save(this.todo).toPromise();
+      await this.todoService.save(this.todo).toPromise()
+      this.todo=this.todoService.getEmptyTodo();
       this.onCloseEdit.emit(true);
       // close this input
     } catch (err){
       this.errMsg = err as string;
       console.log(err);
     }
-  }
-  
-  ngOnInit(): void {
-    // this.route.params.subscribe(async params =>{
-    //   const { id }= params;
-    //   console.log(id);
-    //   this.todo = id ? await this.todoService.getById(id).toPromise() : this.todoService.getEmptyTodo()
-    // })
   }
 }
