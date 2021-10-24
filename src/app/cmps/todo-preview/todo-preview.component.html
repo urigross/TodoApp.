@@ -3,7 +3,6 @@
     <div class="preview-ctr" *ngIf="isEditOff; else goEdit">
         <ul class="todo-preview" class=" todo {{ (todo.isDone ? 'done' : '') }}">
             <li class="todo-content" (click)="onClickToEdit()">{{todo.title}}</li>
-
             <li class="todo-date">Created: {{todo.date | date:'short' }}</li>
             <li class="todo-status">status: {{todo.isDone? "Done":"Active"}}</li>
             <li class="todo-importance">Level: {{todo.importance}}</li>
