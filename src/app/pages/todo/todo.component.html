@@ -1,8 +1,10 @@
 <section class="todo-app-container max-width">
     <!-- filter -->
     <app-todo-filter></app-todo-filter>
-    <!-- add btn -->
-    <input type="text" placeholder="Add your new todo">
+    <!-- add new Todo-->
+    <div class="add-todo-container">
+        <app-todo-edit [todo]="emptyTodo"></app-todo-edit>
+    </div>
     <!-- sorting btns -->
     <div class="sort-btn-container">
         <button class="content-btn" (click)="onToggleSort('title')">↑↓</button>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TodoEditComponent } from './cmps/todo-edit/todo-edit.component';
 import { AboutComponent } from './pages/about/about.component';
 import { TodoComponent } from './pages/todo/todo.component';
 

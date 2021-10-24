@@ -11,23 +11,26 @@ const TODOS: Todo[] = [
   { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3 },
   { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
 ]
+
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
   private _todosDB: Todo[] = TODOS;
-  // this is BehiorSubject - we can to .next to him
+  // this is BehaviorSubject - Can get .next 
   private _todos$ = new BehaviorSubject<Todo[]>([])
-  // this is an Obrervable - we CANNOT do .next to it but we can do all the other operations 
+  // this is an Obrervable - we CANNOT do .next.
   // It acts like a getter - You can list to it's changes
   // this makes a good seperation!
   public todos$ = this._todos$.asObservable();
   // Filter 
   private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '' });
   public filterBy$ = this._filterBy$.asObservable();
-// Sort
+  // Sort
   private _sortBy$ = new BehaviorSubject<SortBy>({ term: '', isAccending: true });
   public sortBy$ = this._sortBy$.asObservable();
+
+  //Query functions
   public query(): void {
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
@@ -37,12 +40,56 @@ export class TodoService {
     }
     this._todos$.next(this._sort(todos, sortBy))
   }
+  public getById(id: string): Observable<Todo>{
+    const todo = this._todosDB.find(todo => todo._id === id);
+    return todo ? of(todo) : Observable.throw(`Todo id ${id} was not found.`); 
+  }
+
+  getEmptyTodo():Todo{
+    return {_id:'', title:'', date: new Date(0) , isDone:false,importance:1}
+  }
+
+  //Action functions
   public remove(todoId: string): void {
     const todos = this._todosDB;
     const todoIdx = todos.findIndex(todo => todo._id === todoId)
     todos.splice(todoIdx, 1);
     this._todos$.next(todos) // update the db after modding.
   }
+
+  public save(todo: Todo){
+    return todo._id ? this._edit(todo) : this._add(todo);
+  }
+
+  private _add(todo: Todo){
+    console.log('entered _add')
+    todo._id = this._getNewId();
+    this._todosDB.push(todo);
+    this._todos$.next(this._todosDB);
+    return of(todo);
+  }
+
+  private _edit(todo: Todo) {
+    console.log('entered _edit')
+    const todos = this._todosDB;
+    const todoIdx:number = todos.findIndex(_todo => _todo._id === todo._id);
+    console.log('todoIdx',todoIdx)
+    todos.splice(todoIdx,1,todo);
+    this._todos$.next(todos);
+    return of(todo);
+  }
+
+  private _getNewId(length =5):string{
+    var text = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random()* possible.length));
+    }
+    return text;
+  }
+
+
+
   // Filtering
   public setFilter(filterBy: FilterBy): void {
     this._filterBy$.next(filterBy)
@@ -97,8 +144,4 @@ export class TodoService {
     if (sortBy.term === "isDone") return this._sortByBoolean(todos, sortBy)    
     else return this._sortByTitle(todos, sortBy.isAccending);
   }
-  // public getTodoById(id: string): Observable<Todo>{
-  //   const todo = this._todosDB.find(todo => todo._id === id);
-  //   return todo ? of(todo) : Observable.throw(`Todo id ${id} was not found.`); 
-  // }
 }
