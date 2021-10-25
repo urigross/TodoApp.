@@ -1,7 +1,6 @@
 ## Whats planned for this project:
 
-0. Fixing edit to status to be clicable. and for it to toggle between active and non active.
-1. Add form validations.
+
 
 
 ## Near future tasks:
