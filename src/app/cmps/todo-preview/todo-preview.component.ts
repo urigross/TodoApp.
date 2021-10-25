@@ -34,6 +34,5 @@ export class TodoPreviewComponent implements OnInit{
     } catch (err){
       this.errMsg = err as string;
     }
-
   }
 }
