@@ -1,12 +1,12 @@
 ## Whats planned for this project:
 
-0. About page.
-1. Route between about page and main app.
-2. internal route between etiable mode and non-editable mode.
+0. Fixing edit to status to be clicable. and for it to toggle between active and non active.
+1. Add form validations.
+
 
 ## Near future tasks:
 
-0. Forms.
+0. CD.
 1. State & NgRX.
 
 # TodoList
