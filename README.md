@@ -1,12 +1,13 @@
 ## Whats planned for this project:
 
+0. local storage functionality.
 
 
 
 ## Near future tasks:
-
-0. CD.
-1. State & NgRX.
+0. http service
+1. CD.
+2. State & NgRX.
 
 # TodoList
 
