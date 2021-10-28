@@ -1,16 +1,17 @@
 <section class="todo-app-container max-width">
-    <!-- filter -->
-    <app-todo-filter></app-todo-filter>
-    <!-- add new Todo-->
-    <div class="add-todo-container">
-        <app-todo-edit [todo]="emptyTodo"></app-todo-edit>
-    </div>
+    <div class="upper-section">
+        <app-todo-filter></app-todo-filter>
+        <!-- add new Todo-->
+        <div class="add-todo-container">
+            <app-todo-edit [todo]="emptyTodo"></app-todo-edit>
+        </div>
+    </div>    <!-- filter -->
     <!-- sorting btns -->
     <div class="sort-btn-container">
-        <button class="content-btn" (click)="onToggleSort('title')">↑↓</button>
-        <button class="date-btn" (click)="onToggleSort('date')">↑↓</button>
-        <button class="status-btn" (click)="onToggleSort('isDone')">↑↓</button>
-        <button class="importance-btn"(click)="onToggleSort('importance')">↑↓</button>
+        <button class="content-btn" (click)="onToggleSort('title')">Content ↑↓</button>
+        <button class="date-btn" (click)="onToggleSort('date')">Date ↑↓</button>
+        <button class="status-btn" (click)="onToggleSort('isDone')">Status ↑↓</button>
+        <button class="importance-btn"(click)="onToggleSort('importance')">Level ↑↓</button>
     </div>
     <!-- todos -->
     <app-todo-list [todos]="todos$ | async" (onIdToRemove)="onIdToRemove($event)"></app-todo-list>
