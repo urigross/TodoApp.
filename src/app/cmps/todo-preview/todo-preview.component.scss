@@ -1,44 +1,125 @@
-.todo-preview-container{
+.todo-preview-container {
     display: flex;
+    justify-content: flex-start;
     gap: 35px;
-    .preview-ctr{
+    .preview-ctr {
         display: flex;
         padding: 10px;
-    box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
-    border-radius: 4px;
-    background-color: #fff;
-    margin-bottom: 15px;
-    margin-top: 15px;
-    height: 47px;
-    line-height: 28px;
-}
-
-ul{
-    font-size: 18px;
-    display: flex;
-    gap: 35px;
-    margin-bottom: 30px;
-    
+        box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
+        border-radius: 4px;
+        background-color: #fff;
+        margin-bottom: 15px;
+        margin-top: 15px;
+        height: 47px;
+        line-height: 28px;
     }
-    button{
+    ul {
+        font-size: 16px;
+        display: flex;
+        gap: 35px;
+        margin-bottom: 30px;
+    }
+    button {
         width: 80px;
         height: 28px;
+    }
+    button::after {
+        content: "remove";
     }
 }
 
 .todo-preview.done {
     text-decoration: line-through;
 }
-.todo-content{
+
+.todo-content {
     width: 350px;
 }
-.todo-date{
+
+.todo-date {
     width: 250px;
 }
-.todo-status{
+
+.todo-status {
     width: 140px;
 }
-.todo-importance{
+
+.todo-importance {
     width: 100px;
 }
 
+@media (max-width:1300px) {
+    .todo-preview-container {
+        .preview-ctr {
+            .todo-preview {
+                .todo-content {
+                    width: 340px;
+                }
+                .todo-status {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:900px) {
+    .todo-preview-container {
+        display: block;
+        .preview-ctr{
+            .todo-preview{
+                .todo-date{
+                    display: none;
+                }
+                .todo-content{
+                    width: 378px;
+                }
+            }
+            button {
+                width: 25px;
+                padding: 3px;
+                line-height: 15px;
+            }
+            button::after {
+                content: "x";
+            }
+        }
+    }
+
+}
+
+
+@media (max-width:615px) {
+    .todo-preview-container {
+        .preview-ctr{
+            .todo-preview{
+                .todo-content{
+                    width: 269px;
+                }
+            }
+        }
+    }
+
+}
+
+@media (max-width:500px) {
+    .todo-preview-container {
+        .preview-ctr{
+            .todo-preview{
+                .todo-importance{
+                    width: 70px;
+                }
+                .todo-content
+                {
+                    width: 230px;
+                }
+            }
+        }
+    }
+
+}
+
+
+@media (max-width:400px) {
+
+}

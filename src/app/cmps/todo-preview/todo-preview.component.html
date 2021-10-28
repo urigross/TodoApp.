@@ -8,7 +8,7 @@
             <li class="todo-importance">Level: {{todo.importance}}</li>
             <!-- remove btn -->
         </ul>
-        <button (click)="onIdToRemove.emit(todo._id)">Remove</button>
+        <button (click)="onIdToRemove.emit(todo._id)"></button>
     </div>
     <ng-template #goEdit>
         <app-todo-edit [todo]="todo" (onCloseEdit)="onCloseEdit($event)"></app-todo-edit>
