@@ -16,7 +16,7 @@ const TODOS: Todo[] = [
   providedIn: 'root'
 })
 export class TodoService {
-  private _todosDB: Todo[] = TODOS;
+  private _todosDB: Todo[] = JSON.parse(localStorage.getItem("todosDB") || "[]"); 
   // this is BehaviorSubject - Can get .next 
   private _todos$ = new BehaviorSubject<Todo[]>([])
   // this is an Obrervable - we CANNOT do .next.
@@ -30,10 +30,16 @@ export class TodoService {
   private _sortBy$ = new BehaviorSubject<SortBy>({ term: '', isAccending: true });
   public sortBy$ = this._sortBy$.asObservable();
 
+
+
   //Query functions
   public query(): void {
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
+    if(!this._todosDB.length){
+      this._todosDB = TODOS;
+      localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
+    }
     let todos: Todo[] = this._todosDB;
     if (filterBy && filterBy.term) {
       todos = this._filter(todos, filterBy.term)
@@ -55,6 +61,8 @@ export class TodoService {
     const todoIdx = todos.findIndex(todo => todo._id === todoId)
     todos.splice(todoIdx, 1);
     this._todos$.next(todos) // update the db after modding.
+    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
+
   }
 
   public save(todo: Todo){
@@ -65,6 +73,7 @@ export class TodoService {
     console.log('entered _add')
     todo._id = this._getNewId();
     this._todosDB.push(todo);
+    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
     this._todos$.next(this._todosDB);
     return of(todo);
   }
@@ -76,6 +85,7 @@ export class TodoService {
     console.log('todoIdx',todoIdx)
     todos.splice(todoIdx,1,todo);
     this._todos$.next(todos);
+    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
     return of(todo);
   }
 
