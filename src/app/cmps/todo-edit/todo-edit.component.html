@@ -13,7 +13,9 @@
             <option [ngValue]="true">Done</option>
             <option [ngValue]="false">Active</option>
         </select>
-        <button  [disabled]="!f.valid">Save</button>
+        <div class="save-btn">
+            <button  [disabled]="!f.valid">Save</button>
+        </div>
 </form>
 <ng-template #loader>
     <h2>Loading..</h2>

@@ -1,46 +1,92 @@
-@media (max-width: 3000px){
-  .header{
-    height: 10vh;
-    background-color: #fff;
-    border-color: #f1f6ed;
-    box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
-    margin-bottom: 50px;
-    width: 1045px;
-      h1{
-          text-align: center;
-          height: 100px;
-          line-height: 100px;
-      }
-  }
-  
-  nav {
-      padding: 10px;
-      display: flex;
-      grid-gap: 20px;
-      & > .active {
-        color: #f53c76;
-        font-weight: bold;
+    @media (max-width: 3000px) {
+        .header {
+            height: 140px;
+            background-color: #fff;
+            border-color: #f1f6ed;
+            box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
+            margin-bottom: 50px;
+            width: 1045px;
+            h1 {
+                text-align: center;
+                height: 100px;
+                line-height: 100px;
+            }
+        }
+        nav {
+            padding: 10px;
+            display: flex;
+            grid-gap: 20px;
+            &>.active {
+                color: #f53c76;
+                font-weight: bold;
+            }
+        }
+    }
+    
+    @media (max-width: 1300px) {
+        .header {
+            width: 860px;
+        }
+    }
+    
+    @media (max-width: 960px) {
+        .header {
+            width: 558px;
+        }
+    }
+    
+    @media (max-width:615px) {
+        .header {
+            width: 450px;
+        }
+    }
+    
+    @media (max-width:500px) {
+        .header {
+            width: 380px;
+        }
+    }
+    
+    @media (max-width:400px) {
+        .header {
+            width: 100%;
+            //  width: 360px;
+        }
+        nav {
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width:385px) {
+      .header{
+        height: 80px;
+        margin-bottom: 32px;
+        h1 {
+            height: 48px;
+            line-height: unset;
+            padding: 14px;
+        }
       }
     }
-} 
+    
+    @media (max-width:360px) {
+        .header {
+            height: 100px;
+            h1 {
+                height: 50px;
+                margin-bottom: 20px;
+            }
+        }
+    }
 
-@media (max-width: 1300px){
-  .header{
-    width: 860px;
-  }
-}
+    @media only screen and (max-width: 420px) and (max-height: 740px)  {
+        .header{
+            height: 90px;
+            h1{
+                text-align: center;
+                height: 50px;
+                line-height: 50px;
+            }
+        }
 
-
-@media (max-width: 960px){
-  .header{
-    width: 558px;
-  }
-}
-
-
-@media (max-width:615px) {
-  .header{
-    width: 450px;
-  }
-
-}
+    }
