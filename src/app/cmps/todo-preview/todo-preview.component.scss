@@ -120,6 +120,16 @@
 }
 
 
-@media (max-width:400px) {
-
+@media (max-width: 385px){
+    .todo-preview-container {
+    .preview-ctr{
+        margin-left: auto;
+        margin-right: auto;
+        width: 360px;
+        justify-content: center;
+        .todo-preview{
+            gap:15px;
+        }
+    }
+}
 }

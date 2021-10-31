@@ -1,11 +1,44 @@
-form {
-    margin-bottom: 56.5px;
-    font-size: 16px;
-    line-height: 28px;
+@media(max-width:3000px){
+    form {
+        margin-bottom: 56.5px;
+        font-size: 16px;
+        line-height: 28px;
+    }
+    small{
+        color: red;
+        font-size: 16px;
+        padding: 12px;
+    }
 }
 
-small{
-    color: red;
-    font-size: 16px;
-    padding: 12px;
+@media(max-width:768px){
+    form > label{
+        margin-right: 2px;
+    }
+    form > input, form > select {
+        margin-right: 20px;
+    }
+}
+
+@media(max-width:385px){
+    form{
+        line-height: 40px;
+        margin-bottom: 0;
+        input{
+            width: 255px;
+        }
+        .save-btn{
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            button{
+            }
+        }
+    }
+    form > label{
+        margin-right: 10px;
+    }
+    form > input, form > select {
+        margin-right: 20px;
+    }
 }

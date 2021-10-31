@@ -4,3 +4,9 @@ form{
 label{
     margin-right: 10px;
 }
+
+@media (max-width:385px){
+    form{
+        margin-bottom: 8px;
+    }
+}

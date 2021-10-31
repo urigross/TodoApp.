@@ -1,5 +1,23 @@
-.footer{
-    height: 10vh;
-    p{
-        text-align: center;    }
+@media (max-width: 3000px) {
+    .footer {
+        height: 64px;
+        line-height: 40px;
+    } 
+}
+
+@media (max-width: 1300px) {
+    .footer {
+        height: 90px;
+        line-height: 90px;
+        vertical-align: middle;
+        p {
+            text-align: center;
+        }
+    }
+}
+@media (max-width: 600px) {
+    .footer {
+        height: 30px;
+        line-height: 30px;
+    }
 }
