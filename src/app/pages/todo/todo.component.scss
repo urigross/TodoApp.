@@ -92,23 +92,49 @@
     }
 }
 
-@media only screen and (max-width: 420px) and (max-height: 740px){
+@media only screen and (max-width: 420px) and (max-height: 740px) {
     .todo-app-container {
-    .upper-section{
-        height: 148px;
+        .upper-section {
+            height: 148px;
+            width: 380px;
+        }
     }
 }
-}
 
-@media (max-width: 385px) {
+@media (max-width: 385px) and (max-height: 900px) {
     .todo-app-container {
         height: 630px;
         margin-bottom: 0;
-        .sort-btn-container{
-            button:not(:last-child){
+        .sort-btn-container {
+            button:not(:last-child) {
                 margin-right: 18px;
             }
         }
     }
 }
+@media only screen and (max-width: 385px) and (max-height: 680px) {
+    .todo-app-container {
+        height: 513px;
+        .upper-section{
+            padding-left: 10px;
+        }
+    }
+}
 
+
+@media only screen and (max-width: 385px){
+    .todo-app-container {
+        .upper-section{
+            padding-left: 15px;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 365px){
+    .todo-app-container {
+        .sort-btn-container{
+            margin-bottom: 15px;
+        }
+    }
+}

@@ -21,3 +21,10 @@
         line-height: 30px;
     }
 }
+
+@media (max-width: 365px) {
+    .footer {
+        margin-top: -7px;
+    }
+}
+
