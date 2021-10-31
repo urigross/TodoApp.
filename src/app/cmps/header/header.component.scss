@@ -69,16 +69,6 @@
       }
     }
     
-    @media (max-width:360px) {
-        .header {
-            height: 100px;
-            h1 {
-                height: 50px;
-                margin-bottom: 20px;
-            }
-        }
-    }
-
     @media only screen and (max-width: 420px) and (max-height: 740px)  {
         .header{
             height: 90px;
@@ -86,7 +76,18 @@
                 text-align: center;
                 height: 50px;
                 line-height: 50px;
+                margin-bottom: 20px;
             }
         }
 
+    }
+    @media (max-width:365px) {
+        .header {
+            height: 70px;
+            h1 {
+                height: 20px;
+                line-height: 20px;
+                margin-bottom: 9px;
+            }
+        }
     }
