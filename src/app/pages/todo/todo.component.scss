@@ -1,10 +1,14 @@
-.add-btn{
+.add-btn {
     width: 80px;
     height: 28px;
     border: none;
     border-radius: 50px;
     font-size: 14px;
 }
+
+
+
+
 @media (max-width: 3000px) {
     .todo-app-container {
         margin-bottom: 36px;
@@ -14,7 +18,7 @@
         input {
             margin-bottom: 30px;
         }
-        .add-btn{
+        .add-btn {
             margin-bottom: 32px;
         }
     }
@@ -27,6 +31,7 @@
         margin-bottom: 30px;
         button {
             height: 27px;
+            border:none;
         }
     }
     .content-btn {
@@ -122,52 +127,49 @@
         }
     }
 }
+
 @media only screen and (max-width: 385px) and (max-height: 680px) {
     .todo-app-container {
         height: 513px;
-        .upper-section{
+        .upper-section {
             padding-left: 10px;
         }
     }
 }
 
-
-@media only screen and (max-width: 385px){
+@media only screen and (max-width: 385px) {
     .todo-app-container {
-        .sort-btn-container{
+        .sort-btn-container {
             justify-content: space-between;
             width: 330px;
-            gap:11px;
+            gap: 11px;
             button:not(:last-child) {
                 margin-right: 0px;
             }
-            button{
+            button {
                 min-width: 70px;
             }
         }
-        .add-btn{
+        .add-btn {
             margin-bottom: 20px;
         }
-        .upper-section{
+        .upper-section {
             padding-left: 15px;
         }
     }
 }
 
-
-@media only screen and (max-width: 365px){
+@media only screen and (max-width: 365px) {
     .todo-app-container {
-        .sort-btn-container{
+        .sort-btn-container {
             margin-bottom: 15px;
         }
     }
 }
 
-
-@media only screen and (max-width: 325px){
+@media only screen and (max-width: 325px) {
     .todo-app-container {
-
-        .sort-btn-container{
+        .sort-btn-container {
             display: flex;
             justify-content: space-evenly;
             max-width: 310px;
@@ -175,15 +177,14 @@
             button:not(:last-child) {
                 margin-right: 5px;
             }
-            button{
+            button {
                 min-width: 75px;
             }
-            .importance-btn{
+            .importance-btn {
                 min-width: 40px;
             }
-            
         }
-        .upper-section{
+        .upper-section {
             width: 315px;
         }
     }
