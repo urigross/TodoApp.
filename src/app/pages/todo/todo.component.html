@@ -3,7 +3,7 @@
         <button>x</button>
     </ng-template> -->
     <app-todo-filter *ngIf="isShown"></app-todo-filter>
-    <button *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo</button>
+    <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo</button>
     <ng-template #elseBlock class="upper-section">
         <button class="back-btn" (click)="isShown=!isShown">x</button>
         <!-- add new Todo-->
