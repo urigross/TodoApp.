@@ -16,7 +16,7 @@
         <button class="content-btn" (click)="onToggleSort('title')">Content ↑↓</button>
         <button class="date-btn" (click)="onToggleSort('date')">Date ↑↓</button>
         <button class="status-btn" (click)="onToggleSort('isDone')">Status ↑↓</button>
-        <button class="importance-btn"(click)="onToggleSort('importance')">Level ↑↓</button>
+        <button class="importance-btn"(click)="onToggleSort('importance')">Lvl ↑↓</button>
     </div>
     <!-- todos -->
     <app-todo-list [todos]="todos$ | async" (onIdToRemove)="onIdToRemove($event)"></app-todo-list>

@@ -168,10 +168,18 @@
     .todo-app-container {
 
         .sort-btn-container{
+            display: flex;
+            justify-content: space-evenly;
             max-width: 310px;
-            gap: 5px;
+            gap: 0px;
             button:not(:last-child) {
                 margin-right: 5px;
+            }
+            button{
+                min-width: 75px;
+            }
+            .importance-btn{
+                min-width: 40px;
             }
             
         }
