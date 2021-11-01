@@ -140,3 +140,17 @@
         }
     }
 }
+
+
+@media (max-width: 325px){
+    .todo-preview-container {
+    .preview-ctr{
+        width: 310px;
+        .todo-preview{
+            .todo-content{
+                width: 190px;
+            }
+        }
+        }
+    }
+}

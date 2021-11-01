@@ -12,6 +12,7 @@ export class TodoComponent implements OnInit {
   todos$: Observable<Todo[]>;
   subscription: Subscription;
   emptyTodo: Todo;
+  isShown:boolean=true;
 
   constructor(private todoService: TodoService) { }
 
@@ -21,11 +22,15 @@ export class TodoComponent implements OnInit {
   onToggleSort(term: string): void {
     this.todoService.setSort(term);
   }
+  onIsShown(data: boolean):void{
+    this.isShown = data;
+  }
   ngOnInit(): void {
     this.todoService.query();
     this.todos$ = this.todoService.todos$;
-    this.emptyTodo = this.todoService.getEmptyTodo();
-
-    
+    this.loadEmptyTodo();
   }
+  loadEmptyTodo(): void {
+    this.emptyTodo = this.todoService.getEmptyTodo();
+  }  
 }

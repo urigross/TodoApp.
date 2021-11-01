@@ -1,13 +1,18 @@
 <section class="todo-app-container max-width">
-    <div class="upper-section">
-        <app-todo-filter></app-todo-filter>
+    <!-- <ng-template #elseBlock>
+        <button>x</button>
+    </ng-template> -->
+    <app-todo-filter *ngIf="isShown"></app-todo-filter>
+    <button *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo</button>
+    <ng-template #elseBlock class="upper-section">
+        <button class="back-btn" (click)="isShown=!isShown">x</button>
         <!-- add new Todo-->
         <div class="add-todo-container">
-            <app-todo-edit [todo]="emptyTodo"></app-todo-edit>
+            <app-todo-edit [todo]="emptyTodo" (isShown)="onIsShown($event)"></app-todo-edit>
         </div>
-    </div>    <!-- filter -->
+    </ng-template>    <!-- filter -->
     <!-- sorting btns -->
-    <div class="sort-btn-container">
+    <div *ngIf="isShown" class="sort-btn-container">
         <button class="content-btn" (click)="onToggleSort('title')">Content ↑↓</button>
         <button class="date-btn" (click)="onToggleSort('date')">Date ↑↓</button>
         <button class="status-btn" (click)="onToggleSort('isDone')">Status ↑↓</button>

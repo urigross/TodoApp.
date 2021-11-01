@@ -138,3 +138,16 @@
         }
     }
 }
+
+@media only screen and (max-width: 325px){
+    .todo-app-container {
+        .sort-btn-container{
+            button:not(:last-child) {
+                margin-right: 5px;
+            }
+        }
+        .upper-section{
+            width: 315px;
+        }
+    }
+}

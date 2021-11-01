@@ -8,13 +8,13 @@
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
-        <label for="importance">Todo status</label>
+        <label for="importance">Status</label>
         <select name="isDone" id="isDone" [(ngModel)]="todo.isDone">
             <option [ngValue]="true">Done</option>
             <option [ngValue]="false">Active</option>
         </select>
         <div class="save-btn">
-            <button  [disabled]="!f.valid">Save</button>
+            <button [disabled]="!f.valid">Save</button>
         </div>
 </form>
 <ng-template #loader>

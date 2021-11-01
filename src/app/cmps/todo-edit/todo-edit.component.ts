@@ -13,6 +13,7 @@ export class TodoEditComponent {
   @Input() todo:Todo;
   @Input() ngValue:any;
   @Output() onCloseEdit = new EventEmitter<boolean>()
+  @Output() isShown = new EventEmitter<boolean>()
   subscription: Subscription;
   errMsg: string = '';
 
@@ -21,9 +22,12 @@ export class TodoEditComponent {
   constructor(private route: ActivatedRoute, private todoService: TodoService) { }
   async onSave(){
     try {
+      console.log('todo before save',this.todo);
       await this.todoService.save(this.todo).toPromise()
       this.todo=this.todoService.getEmptyTodo();
+      console.log(this.todo);
       this.onCloseEdit.emit(true);
+      this.isShown.emit(true);
       // close this input
     } catch (err){
       this.errMsg = err as string;
