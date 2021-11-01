@@ -7,9 +7,9 @@
         padding: 10px;
         box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
         border-radius: 4px;
-        background-color: #fff;
-        margin-bottom: 15px;
-        margin-top: 15px;
+        background-color: rgb(49, 45, 45);
+        margin-bottom: 2px;
+        margin-top: 2px;
         height: 47px;
         line-height: 28px;
     }
@@ -22,10 +22,10 @@
     button {
         width: 80px;
         height: 28px;
-        border: none;
         border-radius: 50px;
         font-size: 14px;
-
+        border: 2px;
+        border-style: outset;
     }
     button::after {
         content: "remove";
@@ -46,7 +46,7 @@
 
 .todo-status {
     width: 140px;
-    span{
+    span {
         color: crimson;
     }
 }
@@ -73,12 +73,12 @@
 @media (max-width:900px) {
     .todo-preview-container {
         display: block;
-        .preview-ctr{
-            .todo-preview{
-                .todo-date{
+        .preview-ctr {
+            .todo-preview {
+                .todo-date {
                     display: none;
                 }
-                .todo-content{
+                .todo-content {
                     width: 378px;
                 }
             }
@@ -92,75 +92,69 @@
             }
         }
     }
-
 }
-
 
 @media (max-width:615px) {
     .todo-preview-container {
-        .preview-ctr{
-            .todo-preview{
-                .todo-content{
+        .preview-ctr {
+            .todo-preview {
+                .todo-content {
                     width: 269px;
                 }
             }
         }
     }
-
 }
 
 @media (max-width:500px) {
     .todo-preview-container {
-        .preview-ctr{
-            .todo-preview{
-                .todo-importance{
+        .preview-ctr {
+            .todo-preview {
+                .todo-importance {
                     width: 70px;
                 }
-                .todo-content
-                {
+                .todo-content {
                     width: 230px;
                 }
             }
         }
     }
-
 }
 
-
-@media (max-width: 385px){
+@media (max-width: 385px) {
     .todo-preview-container {
-    .preview-ctr{
-        margin-left: auto;
-        margin-right: auto;
-        width: 330px;
-        justify-content: center;
-        .todo-preview{
-            gap:15px;
-            .todo-content{
-                width: 175px;
+        .preview-ctr {
+            margin-left: auto;
+            margin-right: auto;
+            width: 330px;
+            justify-content: center;
+            .todo-preview {
+                gap: 15px;
+                .todo-content {
+                    width: 175px;
+                }
             }
         }
     }
 }
-}
-@media (max-width: 360px){
+
+@media (max-width: 360px) {
     .todo-preview-container {
-    .preview-ctr{
-        width: 350px;
+        .preview-ctr {
+            width: 350px;
         }
     }
 }
 
-
-@media (max-width: 325px){
+@media (max-width: 325px) {
     .todo-preview-container {
-    .preview-ctr{
-        width: 310px;
-        .todo-preview{
-            .todo-content{
-                width: 178px;
+        .preview-ctr {
+            width: 310px;
+            .todo-preview {
+                .todo-content {
+                    width: 178px;
+                }
             }
-        }
         }
     }
 }

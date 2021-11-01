@@ -1,3 +1,6 @@
+form input {
+    background-color: rgb(49, 45, 45);
+}
 @media(max-width:3000px) {
     form {
         margin-bottom: 56.5px;
@@ -5,6 +8,11 @@
         line-height: 28px;
         .save-btn{
             display: inline-block;
+        }
+        input{
+            border-radius: 5px;
+            height: 31px;
+            border: none;
         }
     }
     small {
