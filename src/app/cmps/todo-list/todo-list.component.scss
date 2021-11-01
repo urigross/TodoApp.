@@ -2,12 +2,22 @@
     .todo-list{
         height: 500px;
         overflow: auto;
+
     }
 }
 
 @media (max-width: 1300px){
     .todo-list{
         height: 400px;
+        width: 884px;
+        margin-left: 24px;
+    }
+}
+
+@media (max-width: 900px){
+    .todo-list{
+        width: unset;
+        margin-left: unset;
     }
 }
 
@@ -17,8 +27,20 @@
     }
 }
 
+@media (max-width: 385px) and (min-height: 800px){
+    .todo-list{
+        height: 448px;
+    }
+}
+
 @media (max-width: 385px){
     .todo-list{
         width: 385px;
     }
 }
+
+// @media (max-width: 385px){
+//     .todo-list{
+//         width: 310px;
+//     }
+// }

@@ -2,6 +2,9 @@
     .footer {
         height: 64px;
         line-height: 40px;
+        p {
+            text-align: center;
+        }
     } 
 }
 
@@ -10,9 +13,6 @@
         height: 90px;
         line-height: 90px;
         vertical-align: middle;
-        p {
-            text-align: center;
-        }
     }
 }
 @media (max-width: 600px) {

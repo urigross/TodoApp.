@@ -1,3 +1,10 @@
+.add-btn{
+    width: 80px;
+    height: 28px;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+}
 @media (max-width: 3000px) {
     .todo-app-container {
         margin-bottom: 36px;
@@ -6,6 +13,9 @@
         align-items: center;
         input {
             margin-bottom: 30px;
+        }
+        .add-btn{
+            margin-bottom: 32px;
         }
     }
     .add-todo-container {
@@ -106,9 +116,9 @@
         height: 630px;
         margin-bottom: 0;
         .sort-btn-container {
-            button:not(:last-child) {
-                margin-right: 18px;
-            }
+            // button:not(:last-child) {
+            //     margin-right: 18px;
+            // }
         }
     }
 }
@@ -124,6 +134,20 @@
 
 @media only screen and (max-width: 385px){
     .todo-app-container {
+        .sort-btn-container{
+            justify-content: space-between;
+            width: 330px;
+            gap:11px;
+            button:not(:last-child) {
+                margin-right: 0px;
+            }
+            button{
+                min-width: 70px;
+            }
+        }
+        .add-btn{
+            margin-bottom: 20px;
+        }
         .upper-section{
             padding-left: 15px;
         }
@@ -135,6 +159,24 @@
     .todo-app-container {
         .sort-btn-container{
             margin-bottom: 15px;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 325px){
+    .todo-app-container {
+
+        .sort-btn-container{
+            max-width: 310px;
+            gap: 5px;
+            button:not(:last-child) {
+                margin-right: 5px;
+            }
+            
+        }
+        .upper-section{
+            width: 315px;
         }
     }
 }

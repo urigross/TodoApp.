@@ -22,6 +22,10 @@
     button {
         width: 80px;
         height: 28px;
+        border: none;
+        border-radius: 50px;
+        font-size: 14px;
+
     }
     button::after {
         content: "remove";
@@ -42,6 +46,9 @@
 
 .todo-status {
     width: 140px;
+    span{
+        color: crimson;
+    }
 }
 
 .todo-importance {
@@ -125,10 +132,13 @@
     .preview-ctr{
         margin-left: auto;
         margin-right: auto;
-        width: 360px;
+        width: 330px;
         justify-content: center;
         .todo-preview{
             gap:15px;
+            .todo-content{
+                width: 175px;
+            }
         }
     }
 }
@@ -137,6 +147,20 @@
     .todo-preview-container {
     .preview-ctr{
         width: 350px;
+        }
+    }
+}
+
+
+@media (max-width: 325px){
+    .todo-preview-container {
+    .preview-ctr{
+        width: 310px;
+        .todo-preview{
+            .todo-content{
+                width: 178px;
+            }
+        }
         }
     }
 }
