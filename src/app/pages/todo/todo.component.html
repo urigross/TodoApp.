@@ -1,8 +1,10 @@
 <section class="todo-app-container max-width">
-    <!-- <ng-template #elseBlock>
-        <button>x</button>
-    </ng-template> -->
-    <app-todo-filter *ngIf="isShown"></app-todo-filter>
+  <!-- <ng-template #elseBlock>
+      <button>x</button>
+  </ng-template> -->
+
+  <!--  yoava: this can be routing -->
+  <app-todo-filter *ngIf="isShown"></app-todo-filter>
     <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo</button>
     <ng-template #elseBlock class="upper-section">
         <button class="back-btn" (click)="isShown=!isShown">x</button>

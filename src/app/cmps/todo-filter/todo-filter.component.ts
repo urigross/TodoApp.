@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { FilterBy } from 'src/app/models/filterBy.model';
-import { TodoService } from 'src/app/services/todo.service';
+import {Component, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {FilterBy} from 'src/app/models/filterBy.model';
+import {TodoService} from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo-filter',
@@ -10,19 +10,24 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class TodoFilterComponent implements OnInit {
 
-  public filterBy:FilterBy;
+  public filterBy: FilterBy;
   private subscription: Subscription;
 
-  constructor(private todoService: TodoService) { }
-  onSetFilter():void{
+  constructor(private todoService: TodoService) {
+  }
+
+  //
+  onSetFilter(): void {
     this.todoService.setFilter(this.filterBy)
   }
+
   ngOnInit(): void {
-    this.subscription = this.todoService.filterBy$.subscribe(filterBy=>{
+    this.subscription = this.todoService.filterBy$.subscribe(filterBy => {
       this.filterBy = filterBy;
     })
   }
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

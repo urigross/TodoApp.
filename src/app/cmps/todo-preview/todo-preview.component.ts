@@ -1,37 +1,43 @@
-import { Component, EventEmitter,  Input, OnInit, Output } from '@angular/core';
-import { Todo } from 'src/app/models/todo.model';
-import { TodoService } from 'src/app/services/todo.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Todo} from 'src/app/models/todo.model';
+import {TodoService} from 'src/app/services/todo.service';
+
 @Component({
   selector: 'app-todo-preview',
   templateUrl: './todo-preview.component.html',
   styleUrls: ['./todo-preview.component.scss']
 })
-export class TodoPreviewComponent implements OnInit{
+export class TodoPreviewComponent implements OnInit {
 
-  @Input() todo:Todo;
+  @Input() todo: Todo;
+
+  // yoava: why emitter and not service
   @Output() onIdToRemove = new EventEmitter<string>()
-  isEditOff:boolean;
+
+  // yoava: better use positive names, double negative is confusing
+  isEditOff: boolean;
   errMsg: string = '';
 
-  constructor(private todoService: TodoService){}
-
-  ngOnInit(){
-    this.isEditOff = true;
-
+  constructor(private todoService: TodoService) {
   }
 
-  onClickToEdit():void{
-    this.isEditOff = false;
-  }  
+  ngOnInit() {
+    this.isEditOff = true;
+  }
 
-  onCloseEdit(data:boolean):void{
+  onClickToEdit(): void {
+    this.isEditOff = false;
+  }
+
+  onCloseEdit(data: boolean): void {
     this.isEditOff = data;
   }
-  async onMarkCompleted(){
-    this.todo.isDone =!this.todo.isDone;
-    try{
+
+  async onMarkCompleted() {
+    this.todo.isDone = !this.todo.isDone;
+    try {
       await this.todoService.save(this.todo).toPromise()
-    } catch (err){
+    } catch (err) {
       this.errMsg = err as string;
     }
   }
