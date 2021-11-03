@@ -1,10 +1,6 @@
 <section class="todo-app-container max-width">
-  <!-- <ng-template #elseBlock>
-      <button>x</button>
-  </ng-template> -->
-
-  <!--  yoava: this can be routing -->
-  <app-todo-filter *ngIf="isShown"></app-todo-filter>
+    <!--  yoava: this can be routing -->
+    <app-todo-filter *ngIf="isShown"></app-todo-filter>
     <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo</button>
     <ng-template #elseBlock class="upper-section">
         <button class="back-btn" (click)="isShown=!isShown">x</button>
@@ -12,14 +8,16 @@
         <div class="add-todo-container">
             <app-todo-edit [todo]="emptyTodo" (isShown)="onIsShown($event)"></app-todo-edit>
         </div>
-    </ng-template>    <!-- filter -->
+    </ng-template>
+    <!-- filter -->
     <!-- sorting btns -->
     <div *ngIf="isShown" class="sort-btn-container">
         <button class="content-btn" (click)="onToggleSort('title')">Content ↑↓</button>
         <button class="date-btn" (click)="onToggleSort('date')">Date ↑↓</button>
         <button class="status-btn" (click)="onToggleSort('isDone')">Status ↑↓</button>
-        <button class="importance-btn"(click)="onToggleSort('importance')">Lvl ↑↓</button>
+        <button class="importance-btn" (click)="onToggleSort('importance')">Lvl ↑↓</button>
     </div>
     <!-- todos -->
-    <app-todo-list [todos]="todos$ | async" (onIdToRemove)="onIdToRemove($event)"></app-todo-list>
+    <app-todo-list [todos]="todos$ | async" (onIdToRemove)="onIdToRemove($event)" 
+    (onToggleIsDone)="onToggleIsDone($event)"></app-todo-list>
 </section>

@@ -12,6 +12,8 @@ export class TodoComponent implements OnInit {
   todos$: Observable<Todo[]>;
   subscription: Subscription;
   emptyTodo: Todo;
+  errMsg: string = '';
+
 
   // yoava: bad name, is what shown? isFilterShown
   isShown: boolean = true;
@@ -27,8 +29,14 @@ export class TodoComponent implements OnInit {
     this.todoService.setSort(term);
   }
 
+  onToggleIsDone(data: Todo):void{
+    this._saveTodo(data);
+    
+  }
+
   onIsShown(data: boolean): void {
     this.isShown = data;
+    this.todos$ = this.todoService.query();
   }
 
   ngOnInit(): void {
@@ -38,5 +46,14 @@ export class TodoComponent implements OnInit {
 
   loadEmptyTodo(): void {
     this.emptyTodo = this.todoService.getEmptyTodo();
+  }
+  private async _saveTodo(todo:Todo){
+    try {
+      await this.todoService.save(todo).toPromise();
+    }
+    catch (err){
+      this.errMsg = err as string;
+      console.log(err);
+    }
   }
 }

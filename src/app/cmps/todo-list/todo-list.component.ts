@@ -8,8 +8,9 @@ import {Todo} from 'src/app/models/todo.model';
 })
 export class TodoListComponent {
   @Input() todos: Todo[] | null;
-  @Output() onSelectTodo = new EventEmitter<string>()
-  @Output() onIdToRemove = new EventEmitter<string>()
+  @Output() onSelectTodo = new EventEmitter<string>();
+  @Output() onIdToRemove = new EventEmitter<string>();
+  @Output() onToggleIsDone  = new EventEmitter<Todo>();
 
   trackByFn(idx: any, todo: Todo) {
     return todo._id;

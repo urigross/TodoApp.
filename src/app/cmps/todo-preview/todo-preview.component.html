@@ -4,7 +4,7 @@
     <ul class="todo-preview" class=" todo {{ (todo.isDone ? 'done' : '') }}">
       <li (click)="onClickToEdit()" class="todo-content">{{todo.title}}</li>
       <li class="todo-date">Created: {{todo.date | date:'short' }}</li>
-      <li (click)="onMarkCompleted()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
+      <li (click)="onToggleCompleted()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
       <li class="todo-importance">Level: {{todo.importance}}</li>
       <!-- remove btn -->
     </ul>
