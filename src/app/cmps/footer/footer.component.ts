@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+
+// yoava: main branch
+// yoava: cmps, don't be cheap, components. readability means everything
 
 @Component({
   selector: 'app-footer',

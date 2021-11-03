@@ -1,4 +1,4 @@
-export interface SortBy{
-    term:string
-    isAccending:boolean;
+export interface SortBy {
+  term: string
+  isAscending: boolean;
 }

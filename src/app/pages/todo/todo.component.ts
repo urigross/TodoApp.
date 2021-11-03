@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { Todo } from 'src/app/models/todo.model';
-import { TodoService } from 'src/app/services/todo.service';
+import {Component, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
+import {Todo} from 'src/app/models/todo.model';
+import {TodoService} from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -12,25 +12,31 @@ export class TodoComponent implements OnInit {
   todos$: Observable<Todo[]>;
   subscription: Subscription;
   emptyTodo: Todo;
-  isShown:boolean=true;
 
-  constructor(private todoService: TodoService) { }
+  // yoava: bad name, is what shown? isFilterShown
+  isShown: boolean = true;
+
+  constructor(private todoService: TodoService) {
+  }
 
   onIdToRemove(data: string): void {
     this.todoService.remove(data);
   }
+
   onToggleSort(term: string): void {
     this.todoService.setSort(term);
   }
-  onIsShown(data: boolean):void{
+
+  onIsShown(data: boolean): void {
     this.isShown = data;
   }
+
   ngOnInit(): void {
-    this.todoService.query();
-    this.todos$ = this.todoService.todos$;
+    this.todos$ = this.todoService.query();
     this.loadEmptyTodo();
   }
+
   loadEmptyTodo(): void {
     this.emptyTodo = this.todoService.getEmptyTodo();
-  }  
+  }
 }
