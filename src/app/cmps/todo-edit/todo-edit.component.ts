@@ -24,7 +24,7 @@ export class TodoEditComponent {
     try {
       console.log('todo before save',this.todo);
       await this.todoService.save(this.todo).toPromise()
-      this.todo=this.todoService.getEmptyTodo();
+      this.todo=this.todoService.createEmptyTodo();
       console.log(this.todo);
       this.onCloseEdit.emit(true);
       this.isShown.emit(true);

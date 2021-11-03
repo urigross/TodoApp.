@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {FilterBy} from '../models/filterBy.model';
-import {SortBy} from '../models/sortBy.model';
-import {Todo} from '../models/todo.model';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { FilterBy } from '../models/filterBy.model';
+import { SortBy } from '../models/sortBy.model';
+import { Todo } from '../models/todo.model';
 
 const TODOS: Todo[] = [
-  {_id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1},
-  {_id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2},
-  {_id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3},
-  {_id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3},
-  {_id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3},
+  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1 },
+  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2 },
+  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 },
+  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3 },
+  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
 ]
 
 @Injectable({
@@ -30,11 +30,11 @@ export class TodoService {
   // yoava should filterBy$ and sortBy$ be in the service?
 
   // filter
-  private _filterBy$ = new BehaviorSubject<FilterBy>({term: ''});
+  private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '' });
   public filterBy$ = this._filterBy$.asObservable();
 
   // Sort
-  private _sortBy$ = new BehaviorSubject<SortBy>({term: '', isAscending: true});
+  private _sortBy$ = new BehaviorSubject<SortBy>({ term: '', isAscending: true });
   public sortBy$ = this._sortBy$.asObservable();
 
   constructor() {
@@ -47,13 +47,13 @@ export class TodoService {
     const sortBy = this._sortBy$.getValue();
     // yoava this is bad condition
     if (!this._todosDB.length) {
-      this._todosDB = TODOS;
+      this._todosDB = [];
+      // this._todosDB = TODOS;
       // yoava format
       localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
     }
     let todos: Todo[] = this._todosDB;
-    // yoava xx.tt.yy.filterBy?.term
-    if (filterBy && filterBy.term) {
+    if (filterBy?.term) {
       todos = this._filter(todos, filterBy.term)
     }
     this._todos$.next(this._sort(todos, sortBy))
@@ -65,9 +65,8 @@ export class TodoService {
     return todo ? of(todo) : Observable.throw(`Todo id ${id} was not found.`);
   }
 
-  // yoava: createTodo (naming, get)
-  getEmptyTodo(): Todo {
-    return {_id: '', title: '', date: new Date(0), isDone: false, importance: 1}
+  createEmptyTodo(): Todo {
+    return { _id: '', title: '', date: new Date(0), isDone: false, importance: 1 }
   }
 
   //Action functions

@@ -45,7 +45,7 @@ export class TodoComponent implements OnInit {
   }
 
   loadEmptyTodo(): void {
-    this.emptyTodo = this.todoService.getEmptyTodo();
+    this.emptyTodo = this.todoService.createEmptyTodo();
   }
   private async _saveTodo(todo:Todo){
     try {
