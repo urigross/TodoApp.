@@ -1,5 +1,5 @@
 <div class="todo-list">
     <app-todo-preview *ngFor="let todo of todos; index as idx; trackBy:trackByFn" [todo]="todo" 
-    (onIdToRemove)="onIdToRemove.emit($event)"></app-todo-preview>
+    (onIdToRemove)="onIdToRemove.emit($event)" (onToggleIsDone)="onToggleIsDone.emit($event)"></app-todo-preview>
 </div>
 
