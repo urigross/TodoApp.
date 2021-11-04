@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FilterBy } from '../models/filterBy.model';
 import { SortBy } from '../models/sortBy.model';
 import { Todo } from '../models/todo.model';
+import { utilService } from './util.service';
 
 const TODOS: Todo[] = [
   { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1 },
@@ -17,7 +18,7 @@ const TODOS: Todo[] = [
 })
 export class TodoService {
   // this is redundant, you can this._todos$.getValue() & this._todos$.next()
-  private _todosDB: Todo[] = JSON.parse(localStorage.getItem("todosDB") || "[]");
+  private _todosDB: Todo[] = utilService.load('todosDB') || [];
 
   // this is BehaviorSubject - Can get .next
   private _todos$ = new BehaviorSubject<Todo[]>([])
@@ -45,13 +46,6 @@ export class TodoService {
   public query(): Observable<Todo[]> {
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
-    // yoava this is bad condition
-    if (!this._todosDB.length) {
-      this._todosDB = [];
-      // this._todosDB = TODOS;
-      // yoava format
-      localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
-    }
     let todos: Todo[] = this._todosDB;
     if (filterBy?.term) {
       todos = this._filter(todos, filterBy.term)
@@ -75,7 +69,7 @@ export class TodoService {
     const todoIdx = todos.findIndex(todo => todo._id === todoId)
     todos.splice(todoIdx, 1);
     this._todos$.next(todos) // update the db after modding.
-    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
+    utilService.save('todosDB',this._todosDB);
 
   }
 
@@ -112,9 +106,9 @@ export class TodoService {
 
   private _add(todo: Todo) {
     console.log('entered _add')
-    todo._id = this._getNewId();
+    todo._id = utilService.makeId();
     this._todosDB.push(todo);
-    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
+    utilService.save('todosDB',this._todosDB);
     this._todos$.next(this._todosDB);
     return of(todo);
   }
@@ -126,17 +120,8 @@ export class TodoService {
     console.log('todoIdx', todoIdx)
     todos.splice(todoIdx, 1, todo);
     this._todos$.next(todos);
-    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
+    utilService.save('todosDB',this._todosDB);
     return of(todo);
-  }
-
-  private _getNewId(length = 5): string {
-    var text = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
   }
 
   private _filter(todos: Todo[], term: string) {
@@ -168,6 +153,7 @@ export class TodoService {
 
   // TODO:learn how to make this more effective
   private _sort(todos: Todo[], sortBy: SortBy): Todo[] {
+    console.log(todos)
     if (sortBy.term === "title") return this._sortByTitle(todos, sortBy.isAscending)
     if (sortBy.term === "date") return this._sortByNumer(todos, sortBy)
     if (sortBy.term === "isDone") return this._sortByBoolean(todos, sortBy)
