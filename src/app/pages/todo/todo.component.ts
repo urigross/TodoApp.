@@ -9,9 +9,9 @@ import {TodoService} from 'src/app/services/todo.service';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  todos$: Observable<Todo[]>;
-  subscription: Subscription;
-  emptyTodo: Todo;
+  todos$!: Observable<Todo[]>;
+  subscription!: Subscription;
+  emptyTodo!: Todo;
   errMsg: string = '';
 
 
@@ -30,6 +30,7 @@ export class TodoComponent implements OnInit {
   }
 
   onToggleIsDone(data: Todo):void{
+    console.log(data);
     this._saveTodo(data);
     
   }

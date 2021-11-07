@@ -9,13 +9,13 @@ import { TodoService } from 'src/app/services/todo.service';
 })
 export class TodoPreviewComponent implements OnInit {
 
-  @Input() todo: Todo;
+  @Input() todo!: Todo;
 
   @Output() onIdToRemove = new EventEmitter<string>();
   @Output() onToggleIsDone = new EventEmitter<Todo>();
 
   // yoava: better use positive names, double negative is confusing
-  isEditOff: boolean;
+  isEditOff: boolean = true;
   errMsg: string = '';
 
   // constructor(private todoService: TodoService) {
@@ -33,8 +33,10 @@ export class TodoPreviewComponent implements OnInit {
     this.isEditOff = data;
   }
 
-  onToggleCompleted() {
+  ontoggleCompleted() {
+    // toggle the completed todo
     this.todo.isDone = !this.todo.isDone;
+    // send the modified todo to the todo-app component.
     this.onToggleIsDone.emit(this.todo);
   }
 

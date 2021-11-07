@@ -65,6 +65,11 @@ export class TodoService {
     return todo ? of(todo) : Observable.throw(`Todo id ${id} was not found.`);
   }
 
+  // public getById(id: string): Todo | undefined {
+  //   const todos = this._todos$.getValue();
+  //   return todos.find(todo=>todo._id === id);
+  // }
+
   // yoava: createTodo (naming, get)
   getEmptyTodo(): Todo {
     return {_id: '', title: '', date: new Date(0), isDone: false, importance: 1}

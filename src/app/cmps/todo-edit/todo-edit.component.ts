@@ -10,11 +10,11 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./todo-edit.component.scss']
 })
 export class TodoEditComponent {
-  @Input() todo:Todo;
+  @Input() todo!:Todo;
   @Input() ngValue:any;
   @Output() onCloseEdit = new EventEmitter<boolean>()
   @Output() isShown = new EventEmitter<boolean>()
-  subscription: Subscription;
+  subscription!: Subscription;
   errMsg: string = '';
 
 

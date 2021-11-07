@@ -7,7 +7,7 @@ import {Todo} from 'src/app/models/todo.model';
   styleUrls: ['./todo-list.component.scss']
 })
 export class TodoListComponent {
-  @Input() todos: Todo[] | null;
+  @Input() todos!: Todo[] | null ;
   @Output() onSelectTodo = new EventEmitter<string>();
   @Output() onIdToRemove = new EventEmitter<string>();
   @Output() onToggleIsDone  = new EventEmitter<Todo>();

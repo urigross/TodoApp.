@@ -10,8 +10,8 @@ import {TodoService} from 'src/app/services/todo.service';
 })
 export class TodoFilterComponent implements OnInit {
 
-  public filterBy: FilterBy;
-  private subscription: Subscription;
+  public filterBy: FilterBy = {term:''};
+  private subscription!: Subscription;
 
   constructor(private todoService: TodoService) {
   }
