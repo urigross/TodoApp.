@@ -1,12 +1,8 @@
 ## Whats planned for this project:
 
-0. local storage functionality.
+0. Modify todoService to work with less variables
 1. Save edits with AutoFocus.
-2. Find solution to footer bug.
-3. More left padding in S10 responsive mode.
-4. Responsive UI improvements.
-5. add zoom fix mode at all views.
-6. Drag and drop functionality.
+2. Drag and drop functionality.
 
 
 ## Near future tasks:
