@@ -17,9 +17,7 @@ const TODOS: Todo[] = [
 })
 export class TodoService {
   // this is redundant, you can this._todos$.getValue() & this._todos$.next()
-  private _todosDB: Todo[] = JSON.parse(localStorage.getItem("todosDB") || "[]");
-
-  // this is BehaviorSubject - Can get .next
+  // this is BehaviorSubject - Can get .next and getValue()
   private _todos$ = new BehaviorSubject<Todo[]>([])
 
   // this is an Observable - we CANNOT do .next.
@@ -43,15 +41,19 @@ export class TodoService {
   // yoava why public?
   //Query functions
   public query(): Observable<Todo[]> {
+    console.log('Entered query() on todo-service');
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
-    // yoava this is bad condition
-    if (!this._todosDB.length) {
-      this._todosDB = TODOS;
+    let todos = JSON.parse(localStorage.getItem("todosDB") || "[]");
+    console.log('load from local storage to check reading:',JSON.parse(localStorage.getItem("todosDB") || "[]"));
+    console.log('todos on query()',todos);
+    console.log('todos.length on query()',todos.length);
+    if (!todos.length) {
+      this._todos$.next(TODOS);
       // yoava format
-      localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
+      localStorage.setItem('todosDB', JSON.stringify(todos));  // Set storage to []
+      console.log(`Expected results: Storage set with [], Actual results: Storage was set with ${todos}`);
     }
-    let todos: Todo[] = this._todosDB;
     // yoava xx.tt.yy.filterBy?.term
     if (filterBy && filterBy.term) {
       todos = this._filter(todos, filterBy.term)
@@ -61,7 +63,8 @@ export class TodoService {
   }
 
   public getById(id: string): Observable<Todo> {
-    const todo = this._todosDB.find(todo => todo._id === id);
+    const todos = this._todos$.getValue();
+    const todo = todos.find(todo => todo._id === id);
     return todo ? of(todo) : Observable.throw(`Todo id ${id} was not found.`);
   }
 
@@ -77,11 +80,12 @@ export class TodoService {
 
   //Action functions
   public remove(todoId: string): void {
-    const todos = this._todosDB;
+    console.log('Entered remove() in todo-service');
+    const todos = this._todos$.getValue();
     const todoIdx = todos.findIndex(todo => todo._id === todoId)
     todos.splice(todoIdx, 1);
     this._todos$.next(todos) // update the db after modding.
-    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
+    localStorage.setItem('todosDB', JSON.stringify(todos));
 
   }
 
@@ -117,28 +121,29 @@ export class TodoService {
   }
 
   private _add(todo: Todo) {
-    console.log('entered _add')
+    console.log('entered _add in todo-service')
+    const todos = this._todos$.getValue();
     todo._id = this._getNewId();
-    this._todosDB.push(todo);
-    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
-    this._todos$.next(this._todosDB);
+    todos.push(todo);
+    localStorage.setItem('todosDB', JSON.stringify(todos));
+    console.log('load from local storage to check reading:',JSON.parse(localStorage.getItem("todosDB") || "[]"))
+    this._todos$.next(todos);
     return of(todo);
   }
 
   private _edit(todo: Todo) {
-    console.log('entered _edit')
-    const todos = this._todosDB;
+    console.log('entered _edit in todo service')
+    const todos = this._todos$.getValue();
     const todoIdx: number = todos.findIndex(_todo => _todo._id === todo._id);
-    console.log('todoIdx', todoIdx)
     todos.splice(todoIdx, 1, todo);
     this._todos$.next(todos);
-    localStorage.setItem('todosDB', JSON.stringify(this._todosDB));
+    localStorage.setItem('todosDB', JSON.stringify(todos));
     return of(todo);
   }
 
   private _getNewId(length = 5): string {
     var text = '';
-    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     for (let i = 0; i < length; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }

@@ -30,7 +30,6 @@ export class TodoComponent implements OnInit {
   }
 
   onToggleIsDone(data: Todo):void{
-    console.log(data);
     this._saveTodo(data);
     
   }

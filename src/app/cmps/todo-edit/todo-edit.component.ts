@@ -22,10 +22,10 @@ export class TodoEditComponent {
   constructor(private route: ActivatedRoute, private todoService: TodoService) { }
   async onSave(){
     try {
-      console.log('todo before save',this.todo);
+      console.log('Entered todo onSave() in edit component',this.todo);
       await this.todoService.save(this.todo).toPromise()
       this.todo=this.todoService.getEmptyTodo();
-      console.log(this.todo);
+      console.log('this.todo on onSave()',this.todo);
       this.onCloseEdit.emit(true);
       this.isShown.emit(true);
       // close this input
