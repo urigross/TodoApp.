@@ -1,26 +1,25 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {FilterBy} from '../models/filterBy.model';
-import {SortBy} from '../models/sortBy.model';
-import {Todo} from '../models/todo.model';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { FilterBy } from '../models/filterBy.model';
+import { SortBy } from '../models/sortBy.model';
+import { Todo } from '../models/todo.model';
 import { utilService } from './util.service';
 
 const TODOS: Todo[] = [
-  {_id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1},
-  {_id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2},
-  {_id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3},
-  {_id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3},
-  {_id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3},
+  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1 },
+  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2 },
+  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 },
+  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3 },
+  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
 ]
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  // this is redundant, you can this._todos$.getValue() & this._todos$.next()
   // this is BehaviorSubject - Can get .next and getValue()
-  private _todos$ = new BehaviorSubject<Todo[]>([])
-  private KEY:string = 'todosDB';
+  private KEY: string = 'todosDB';
+  private _todos$ = new BehaviorSubject<Todo[]>([]);
 
   // this is an Observable - we CANNOT do .next.
   // It acts like a getter - You can list to it's changes
@@ -30,11 +29,11 @@ export class TodoService {
   // yoava should filterBy$ and sortBy$ be in the service?
 
   // filter
-  private _filterBy$ = new BehaviorSubject<FilterBy>({term: ''});
+  private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '' });
   public filterBy$ = this._filterBy$.asObservable();
 
   // Sort
-  private _sortBy$ = new BehaviorSubject<SortBy>({term: '', isAscending: true});
+  private _sortBy$ = new BehaviorSubject<SortBy>({ term: '', isAscending: true });
   public sortBy$ = this._sortBy$.asObservable();
 
   constructor() {
@@ -47,17 +46,14 @@ export class TodoService {
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
     let todos = utilService.load(this.KEY);
-    console.log('load from local storage to check reading:',utilService.load(this.KEY));
-    console.log('todos on query()',todos);
-    console.log('todos.length on query()',todos.length);
+    console.log('load from local storage to check reading:', utilService.load(this.KEY));
+    console.log('todos on query()', todos);
+    console.log('todos.length on query()', todos.length);
     if (!todos.length) {
       this._todos$.next(TODOS);
-      // yoava format
-      utilService.save(this.KEY,todos);// Set storage to []
-      //localStorage.setItem('todosDB', JSON.stringify(todos));  // Set storage to []
+      utilService.save(this.KEY, todos);// Set storage to []
       console.log(`Expected results: Storage set with [], Actual results: Storage was set with ${todos}`);
     }
-    // yoava xx.tt.yy.filterBy?.term
     if (filterBy && filterBy.term) {
       todos = this._filter(todos, filterBy.term)
     }
@@ -65,19 +61,13 @@ export class TodoService {
     return this._todos$;
   }
 
-  public getById(id: string): Todo | undefined{
+  public getById(id: string): Todo | undefined {
     const todos = this._todos$.getValue();
-    return  todos.find(todo => todo._id === id);
+    return todos.find(todo => todo._id === id);
   }
 
-  // public getById(id: string): Todo | undefined {
-  //   const todos = this._todos$.getValue();
-  //   return todos.find(todo=>todo._id === id);
-  // }
-
-  // yoava: createTodo (naming, get)
   getEmptyTodo(): Todo {
-    return {_id: '', title: '', date: new Date(0), isDone: false, importance: 1}
+    return { _id: '', title: '', date: new Date(0), isDone: false, importance: 1 }
   }
 
   //Action functions
@@ -87,9 +77,7 @@ export class TodoService {
     const todoIdx = todos.findIndex(todo => todo._id === todoId)
     todos.splice(todoIdx, 1);
     this._todos$.next(todos) // update the db after modding.
-    utilService.save(this.KEY,todos);
-    //localStorage.setItem('todosDB', JSON.stringify(todos));
-
+    utilService.save(this.KEY, todos);
   }
 
   public save(todo: Todo) {
@@ -126,12 +114,10 @@ export class TodoService {
   private _add(todo: Todo) {
     console.log('entered _add in todo-service')
     const todos = this._todos$.getValue();
-    //todo._id = this._getNewId();
     todo._id = utilService.makeId();
     todos.push(todo);
-    utilService.save(this.KEY,todos);
-    //localStorage.setItem('todosDB', JSON.stringify(todos));
-    console.log('load from local storage to check reading:',utilService.load(this.KEY))
+    utilService.save(this.KEY, todos);
+    console.log('load from local storage to check reading:', utilService.load(this.KEY))
     this._todos$.next(todos);
     return of(todo);
   }
@@ -142,19 +128,9 @@ export class TodoService {
     const todoIdx: number = todos.findIndex(_todo => _todo._id === todo._id);
     todos.splice(todoIdx, 1, todo);
     this._todos$.next(todos);
-    utilService.save(this.KEY,todos)
-    //localStorage.setItem('todosDB', JSON.stringify(todos));
+    utilService.save(this.KEY, todos)
     return of(todo);
   }
-
-  // private _getNewId(length = 5): string {
-  //   var text = '';
-  //   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  //   for (let i = 0; i < length; i++) {
-  //     text += possible.charAt(Math.floor(Math.random() * possible.length));
-  //   }
-  //   return text;
-  // }
 
   private _filter(todos: Todo[], term: string) {
     term = term.toLocaleLowerCase();
