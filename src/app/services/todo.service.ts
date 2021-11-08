@@ -62,10 +62,9 @@ export class TodoService {
     return this._todos$;
   }
 
-  public getById(id: string): Observable<Todo> {
+  public getById(id: string): Todo | undefined{
     const todos = this._todos$.getValue();
-    const todo = todos.find(todo => todo._id === id);
-    return todo ? of(todo) : Observable.throw(`Todo id ${id} was not found.`);
+    return  todos.find(todo => todo._id === id);
   }
 
   // public getById(id: string): Todo | undefined {
