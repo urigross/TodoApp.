@@ -1,8 +1,10 @@
 <!-- detailed todo with edit btn -->
 <div class="todo-preview-container">
-  <div *ngIf="isEditOff; else goEdit" class="preview-ctr">
+  <!-- <div *ngIf="isEditOff; else goEdit" class="preview-ctr"> -->
+  <div class="preview-ctr">
     <ul class="todo-preview" class=" todo {{ (todo.isDone ? 'done' : '') }}">
-      <li (click)="onClickToEdit()" class="todo-content">{{todo.title}}</li>
+      <!-- <li (click)="onClickToEdit()" class="todo-content">{{todo.title}}</li> -->
+      <a [routerLink]="['/edit/',todo._id]"><li class="todo-content">{{todo.title}}</li></a>
       <li class="todo-date">Created: {{todo.date | date:'short' }}</li>
       <li (click)="ontoggleCompleted()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
       <li class="todo-importance">Level: {{todo.importance}}</li>
@@ -10,7 +12,8 @@
     </ul>
     <button (click)="onIdToRemove.emit(todo._id)"></button>
   </div>
-  <ng-template #goEdit>
+  <router-outlet></router-outlet>
+  <!-- <ng-template #goEdit>
     <app-todo-edit (onCloseEdit)="onCloseEdit($event)" [todo]="todo"></app-todo-edit>
-  </ng-template>
+  </ng-template> -->
 </div>
