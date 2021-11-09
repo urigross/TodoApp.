@@ -2,7 +2,7 @@
     <!-- <app-todo-filter *ngIf="isShown"></app-todo-filter> -->
     <app-todo-filter></app-todo-filter>
     <!-- <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo old</button> -->
-    <a routerLink="/edit">Add Todo</a>
+    <a routerLink="/edit" class="add-btn">Add Todo</a>
     <ng-template #elseBlock class="upper-section">
         <button class="back-btn" (click)="isShown=!isShown">x</button>
         <!-- add new Todo-->
