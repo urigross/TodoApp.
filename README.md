@@ -11,7 +11,7 @@
 2. State & NgRX.
 
 # TodoList
-
+Check at todo-resolver service how to get rid of resolve type any.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
 
 ## Development server

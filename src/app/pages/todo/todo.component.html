@@ -1,12 +1,13 @@
 <section class="todo-app-container max-width">
-    <!--  yoava: this can be routing -->
-    <app-todo-filter *ngIf="isShown"></app-todo-filter>
-    <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo</button>
+    <!-- <app-todo-filter *ngIf="isShown"></app-todo-filter> -->
+    <app-todo-filter></app-todo-filter>
+    <!-- <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo old</button> -->
+    <a routerLink="/edit">Add Todo</a>
     <ng-template #elseBlock class="upper-section">
         <button class="back-btn" (click)="isShown=!isShown">x</button>
         <!-- add new Todo-->
         <div class="add-todo-container">
-            <app-todo-edit [todo]="emptyTodo" (isShown)="onIsShown($event)"></app-todo-edit>
+            <router-outlet></router-outlet>
         </div>
     </ng-template>
     <!-- filter -->
