@@ -1,14 +1,15 @@
 ## Whats planned for this project:
 
-0. Modify todoService to work with less variables
-1. Save edits with AutoFocus.
-2. Drag and drop functionality.
+0. Save edits with AutoFocus.
+1. Drag and drop functionality.
+2. More css improvements.
 
 
 ## Near future tasks:
 0. http service
 1. CD.
 2. State & NgRX.
+3. Backend
 
 # TodoList
 Check at todo-resolver service how to get rid of resolve type any.
