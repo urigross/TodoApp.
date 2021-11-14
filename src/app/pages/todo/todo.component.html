@@ -3,22 +3,24 @@
     <app-todo-filter></app-todo-filter>
     <!-- <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo old</button> -->
     <a routerLink="/edit" class="add-btn">Add Todo</a>
-    <ng-template #elseBlock class="upper-section">
-        <button class="back-btn" (click)="isShown=!isShown">x</button>
+    <div class="upper-section">
+        <!-- <button class="back-btn" (click)="isShown=!isShown">x</button> -->
+        <button class="back-btn">x</button>
         <!-- add new Todo-->
-        <div class="add-todo-container">
+        <!-- <div *ngIf="isAddTodo" class="add-todo-container">
             <router-outlet></router-outlet>
-        </div>
-    </ng-template>
+        </div> -->
+    </div>
     <!-- filter -->
     <!-- sorting btns -->
-    <div *ngIf="isShown" class="sort-btn-container">
+    <div class="sort-btn-container">
         <button class="content-btn" (click)="onToggleSort('title')">Content ↑↓</button>
         <button class="date-btn" (click)="onToggleSort('date')">Date ↑↓</button>
         <button class="status-btn" (click)="onToggleSort('isDone')">Status ↑↓</button>
         <button class="importance-btn" (click)="onToggleSort('importance')">Lvl ↑↓</button>
     </div>
     <!-- todos -->
+    <!-- <app-todo-list [todos]="todos$ | async" [isEditTodo]="isEditTodo" (onIdToRemove)="onIdToRemove($event)"  -->
     <app-todo-list [todos]="todos$ | async" (onIdToRemove)="onIdToRemove($event)" 
     (onToggleIsDone)="onToggleIsDone($event)"></app-todo-list>
 </section>

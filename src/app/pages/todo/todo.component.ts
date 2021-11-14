@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {Todo} from 'src/app/models/todo.model';
 import {TodoService} from 'src/app/services/todo.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-todo',
@@ -13,12 +15,30 @@ export class TodoComponent implements OnInit {
   subscription!: Subscription;
   emptyTodo!: Todo;
   errMsg: string = '';
+  previousUrl: string='';
+
 
 
   // yoava: bad name, is what shown? isFilterShown
-  isShown: boolean = true;
+  isAddTodo: boolean = false;
+  isEditTodo: boolean = false;
 
-  constructor(private todoService: TodoService) {
+  constructor(private todoService: TodoService, location: Location, router: Router) {
+    router.events.subscribe(val=>{
+      var urlPath = location.path();
+      if(urlPath === '/edit'){
+        this.isAddTodo = true;      
+
+      }
+      if(urlPath ===''){
+        this.isAddTodo = false;
+        this.isEditTodo = false;
+      }
+      // if(urlPath.includes('/edit/')){
+      //   this.isEditTodo = true;
+      // }
+     //TODO: complete if with editable: id with params!
+    })
   }
 
   onIdToRemove(data: string): void {
@@ -34,11 +54,12 @@ export class TodoComponent implements OnInit {
     
   }
 
-  onIsShown(data: boolean): void {
-    this.isShown = data;
-    this.todos$ = this.todoService.query();
-  }
+  // onIsShown(data: boolean): void {
+  //   this.isShown = data;
+  //   this.todos$ = this.todoService.query();
+  // }
   ngOnInit(): void {
+    console.log('todo component on init')
     //this.todos$ = this.todoService.todos$;
     this.todos$ = this.todoService.query();
     //console.log(this.todoService.todos$)

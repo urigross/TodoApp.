@@ -67,7 +67,7 @@ export class TodoService {
   }
 
   getEmptyTodo(): Todo {
-    return { _id: '', title: '', date: new Date(0), isDone: false, importance: 1 }
+    return { _id: '', title: '', date: new Date(), isDone: false, importance: 1 }
   }
 
   //Action functions
@@ -80,7 +80,7 @@ export class TodoService {
     utilService.save(this.KEY, todos);
   }
 
-  public save(todo: Todo) {
+  public save(todo: Todo): Observable<Todo> {
     return todo._id ? this._edit(todo) : this._add(todo);
   }
 
@@ -111,7 +111,7 @@ export class TodoService {
     this.query();
   }
 
-  private _add(todo: Todo) {
+  private _add(todo: Todo): Observable<Todo> {
     console.log('entered _add in todo-service')
     const todos = this._todos$.getValue();
     todo._id = utilService.makeId();
@@ -122,7 +122,7 @@ export class TodoService {
     return of(todo);
   }
 
-  private _edit(todo: Todo) {
+  private _edit(todo: Todo): Observable<Todo> {
     console.log('entered _edit in todo service')
     const todos = this._todos$.getValue();
     const todoIdx: number = todos.findIndex(_todo => _todo._id === todo._id);
