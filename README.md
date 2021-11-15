@@ -3,6 +3,8 @@
 0. Save edits with AutoFocus.
 1. Drag and drop functionality.
 2. More css improvements.
+3. roboto font.
+4. Fontawesome.
 
 
 ## Near future tasks:
