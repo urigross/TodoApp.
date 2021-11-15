@@ -105,6 +105,7 @@
 @media(max-width:385px) {
     form {
         width: 330px;
+        border: none;
         line-height: 40px;
         margin-bottom: 0;
         input, small {
@@ -149,8 +150,6 @@
 @media (max-width: 325px) {
     form{
         width: 310px;
-        border: none;
-
         .title-container{
             input, small{
                 width: 270px;
