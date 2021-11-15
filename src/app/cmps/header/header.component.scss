@@ -32,12 +32,16 @@
     @media (max-width: 960px) {
         .header {
             width: 558px;
+            nav{
+                justify-content: center;
+            }
         }
     }
     
     @media (max-width:615px) {
         .header {
             width: 450px;
+
         }
     }
     
