@@ -95,10 +95,11 @@
 }
 
 
-
-@media(max-width:420px) {
+// Iphone 12 max
+@media(max-width:435px) {
     form{
         width: 380px;
+        border: none;
     }
 }
 
@@ -146,7 +147,7 @@
         margin: 0 auto;
     }
 }
-
+//Galaxy S9
 @media (max-width: 325px) {
     form{
         width: 310px;
