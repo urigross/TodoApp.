@@ -140,3 +140,16 @@
         margin-right: 0;
     }
 }
+
+@media (max-width: 325px) {
+    form{
+        width: 310px;
+        border: none;
+
+        .title-container{
+            input{
+                width: 300px;
+            }
+        }
+    }
+}
