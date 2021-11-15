@@ -1,9 +1,12 @@
 .add-btn {
     width: 80px;
     height: 28px;
+    text-align: center;
+    line-height: 28px;
     border: none;
     border-radius: 50px;
     font-size: 14px;
+    background-color: rgb(49, 45, 45);
 }
 
 
@@ -120,11 +123,6 @@
     .todo-app-container {
         height: 630px;
         margin-bottom: 0;
-        .sort-btn-container {
-            // button:not(:last-child) {
-            //     margin-right: 18px;
-            // }
-        }
     }
 }
 

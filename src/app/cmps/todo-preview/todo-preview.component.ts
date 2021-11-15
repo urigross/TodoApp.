@@ -7,31 +7,30 @@ import { TodoService } from 'src/app/services/todo.service';
   templateUrl: './todo-preview.component.html',
   styleUrls: ['./todo-preview.component.scss']
 })
-export class TodoPreviewComponent implements OnInit {
+export class TodoPreviewComponent   {
 
   @Input() todo!: Todo;
-
+  // @Input() isEditTodo:boolean = false; 
   @Output() onIdToRemove = new EventEmitter<string>();
   @Output() onToggleIsDone = new EventEmitter<Todo>();
-
-  // yoava: better use positive names, double negative is confusing
-  isEditOff: boolean = true;
   errMsg: string = '';
+  // yoava: better use positive names, double negative is confusing
+  // isEditOff: boolean = true;
 
   // constructor(private todoService: TodoService) {
   // }
 
-  ngOnInit() {
-    this.isEditOff = true;
-  }
+  // ngOnInit() {
+  //   this.isEditOff = true;
+  // }
 
-  onClickToEdit(): void {
-    this.isEditOff = false;
-  }
+  // onClickToEdit(): void {
+  //   this.isEditOff = false;
+  // }
 
-  onCloseEdit(data: boolean): void {
-    this.isEditOff = data;
-  }
+  // onCloseEdit(data: boolean): void {
+  //   this.isEditOff = data;
+  // }
 
   ontoggleCompleted() {
     // toggle the completed todo
@@ -39,6 +38,8 @@ export class TodoPreviewComponent implements OnInit {
     // send the modified todo to the todo-app component.
     this.onToggleIsDone.emit(this.todo);
   }
+
+
 
   // async onMarkCompleted() {
   //   this.todo.isDone = !this.todo.isDone;

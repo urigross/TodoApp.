@@ -1,0 +1,142 @@
+@media(max-width:3000px) {
+    form {
+        border: solid 1px wheat;
+        width: 900px;
+        margin: 0 auto;
+        padding: 50px;
+        height: 65vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 56.5px;
+        font-size: 20px;
+        line-height: 30px;
+        gap: 40px;
+        .title-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            input{
+                width: 500px;
+            }
+            ::placeholder{
+                color: wheat;
+                padding-left: 10px;
+            }
+            small {
+                color: red;
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+        .importance-container{
+            display: flex;
+            flex-direction: row;
+            width: 153px;
+            justify-content: space-between;
+            select{
+                margin-top: 4px;
+                height: 22px;
+            }
+        }
+        .status-container{
+            display: flex;
+            flex-direction: row;
+            width: 153px;
+            justify-content: space-between;
+            select{
+                margin-top: 4px;
+                height: 22px;
+            }
+
+        }
+        
+        .save-btn{
+            display: inline-block;
+            button{
+                width: 150px;
+            }
+        }
+        input{
+            border-radius: 5px;
+            height: 31px;
+            border: none;
+        }
+    }
+
+}
+
+@media (max-width:960px){
+    form{
+        width: 500px;
+        .title-container{
+            input{
+                width: 400px;
+            }
+        }
+    }
+}
+
+@media (max-width:615px){
+    form{
+        width: 400px;
+        .title-container{
+            input{
+                width: 350px;
+            }
+        }
+    }
+}
+
+
+
+@media(max-width:420px) {
+    form{
+        width: 380px;
+    }
+}
+
+@media(max-width:385px) {
+    form {
+        width: 330px;
+        line-height: 40px;
+        margin-bottom: 0;
+        input {
+            width: 255px;
+        }
+        .save-btn {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        input,
+        select {
+            margin-right: 20px;
+        }
+    }
+    form>label {
+        margin-right: 10px;
+    }
+}
+
+@media(max-width:330px) {
+    form {
+        width: 310px ;
+        input {
+            width: 220px;
+        }
+        .save-btn {
+            margin-top: 5px;
+        }
+        input{
+            margin-right: 0;
+        }
+        label, select{
+            margin-right: 14px;
+        }
+    }
+    form:last-child{
+        margin-right: 0;
+    }
+}

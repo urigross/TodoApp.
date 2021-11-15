@@ -1,7 +1,10 @@
 .todo-preview-container {
-    display: flex;
-    justify-content: flex-start;
-    gap: 35px;
+    ul {
+        font-size: 16px;
+        display: flex;
+        gap: 35px;
+        margin-bottom: 30px;
+    }
     .preview-ctr {
         display: flex;
         padding: 10px;
@@ -12,13 +15,26 @@
         margin-top: 2px;
         height: 47px;
         line-height: 28px;
+        .todo-preview {
+            a {
+                width: 350px;
+                color: inherit;               
+        }
+            .todo-date {
+                width: 250px;
+            }
+            .todo-status {
+                width: 140px;
+                span {
+                    color: crimson;
+                }
+            }
+            .todo-importance {
+                width: 100px;
+            }
+        }
     }
-    ul {
-        font-size: 16px;
-        display: flex;
-        gap: 35px;
-        margin-bottom: 30px;
-    }
+
     button {
         width: 80px;
         height: 28px;
@@ -36,27 +52,11 @@
     text-decoration: line-through;
 }
 
-.todo-content {
-    width: 350px;
-}
-
-.todo-date {
-    width: 250px;
-}
-
-.todo-status {
-    width: 140px;
-    span {
-        color: crimson;
-    }
-}
-
-.todo-importance {
-    width: 100px;
-}
-
 @media (max-width:1300px) {
     .todo-preview-container {
+        display: flex;
+        justify-content: flex-start;
+        gap: 35px;
         .preview-ctr {
             .todo-preview {
                 .todo-content {
