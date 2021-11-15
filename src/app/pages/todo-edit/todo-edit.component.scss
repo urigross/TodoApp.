@@ -11,13 +11,12 @@ a{
     form {
         border: solid 1px wheat;
         width: 900px;
-        margin: 0 auto;
+        margin: 0 auto 56.5px;
         padding: 50px;
         height: 65vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 56.5px;
         font-size: 20px;
         line-height: 30px;
         gap: 40px;
@@ -69,7 +68,7 @@ a{
         .save-btn{
             display: inline-block;
             button{
-                width: 150px;
+                width: 153px;
             }
         }
         input{
@@ -117,7 +116,7 @@ a{
         width: 330px;
         border: none;
         line-height: 40px;
-        margin-bottom: 0;
+        margin-bottom: 20px;
         input, small {
             width: 255px;
         }
@@ -125,10 +124,6 @@ a{
             margin-top: 10px;
             display: flex;
             justify-content: center;
-        }
-        input,
-        select {
-            margin-right: 20px;
         }
     }
     form>label {
@@ -148,12 +143,6 @@ a{
         input{
             margin-right: 0;
         }
-        label, select{
-            margin-right: 14px;
-        }
-    }
-    form:last-child{
-        margin: 0 auto;
     }
 }
 //Galaxy S9
