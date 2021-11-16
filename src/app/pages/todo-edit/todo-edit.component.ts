@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
+import { faWindowClose } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-todo-edit',
@@ -15,6 +16,8 @@ export class TodoEditComponent implements OnInit {
   todo: Todo = this.todoService.getEmptyTodo();
   subscription!: Subscription;
   errMsg: string ='';
+  // FontAwesome icons
+  faWindowClose = faWindowClose;
 
   @Input() ngValue: any; // Form option tag value
 
