@@ -11,7 +11,7 @@
             <li class="todo-importance">Level: {{todo.importance}}</li>
             <!-- remove btn -->
         </ul>
-        <button (click)="onIdToRemove.emit(todo._id)"></button>
+        <button (click)="onIdToRemove.emit(todo._id)"><fa-icon [icon]="faTrash"></fa-icon></button>
     </div>
     <!-- <ng-template #editRoute> -->
         <!-- <router-outlet></router-outlet> -->

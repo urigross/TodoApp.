@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Todo } from 'src/app/models/todo.model';
-import { TodoService } from 'src/app/services/todo.service';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-todo-preview',
@@ -14,6 +14,8 @@ export class TodoPreviewComponent   {
   @Output() onIdToRemove = new EventEmitter<string>();
   @Output() onToggleIsDone = new EventEmitter<Todo>();
   errMsg: string = '';
+  // FontAwesome icons
+  faTrash = faTrash;
   // yoava: better use positive names, double negative is confusing
   // isEditOff: boolean = true;
 

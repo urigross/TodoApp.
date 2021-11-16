@@ -11,6 +11,7 @@ import { TodoFilterComponent } from './cmps/todo-filter/todo-filter.component';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './pages/about/about.component';
 import { TodoEditComponent } from './pages/todo-edit/todo-edit.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TodoEditComponent } from './pages/todo-edit/todo-edit.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

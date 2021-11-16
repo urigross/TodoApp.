@@ -2,7 +2,7 @@
     <!-- <app-todo-filter *ngIf="isShown"></app-todo-filter> -->
     <app-todo-filter></app-todo-filter>
     <!-- <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo old</button> -->
-    <a routerLink="/edit" class="add-btn">Add Todo</a>
+    <a routerLink="/edit" class="add-btn"><fa-icon [icon]="faPlus"></fa-icon></a>
     <div class="upper-section">
         <!-- <button class="back-btn" (click)="isShown=!isShown">x</button> -->
         <!-- add new Todo-->
@@ -13,10 +13,11 @@
     <!-- filter -->
     <!-- sorting btns -->
     <div class="sort-btn-container">
-        <button class="content-btn" (click)="onToggleSort('title')">Content ↑↓</button>
-        <button class="date-btn" (click)="onToggleSort('date')">Date ↑↓</button>
-        <button class="status-btn" (click)="onToggleSort('isDone')">Status ↑↓</button>
-        <button class="importance-btn" (click)="onToggleSort('importance')">Lvl ↑↓</button>
+        
+        <button class="content-btn" (click)="onToggleSort('title')">Content <fa-icon [icon]="faSort"></fa-icon></button>
+        <button class="date-btn" (click)="onToggleSort('date')">Date <fa-icon [icon]="faSort"></fa-icon></button>
+        <button class="status-btn" (click)="onToggleSort('isDone')">Status <fa-icon [icon]="faSort"></fa-icon></button>
+        <button class="importance-btn" (click)="onToggleSort('importance')">Lvl <fa-icon [icon]="faSort"></fa-icon></button>
     </div>
     <!-- todos -->
     <!-- <app-todo-list [todos]="todos$ | async" [isEditTodo]="isEditTodo" (onIdToRemove)="onIdToRemove($event)"  -->
