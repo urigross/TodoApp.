@@ -4,6 +4,7 @@ import {Observable, Subscription} from 'rxjs';
 import {Todo} from 'src/app/models/todo.model';
 import {TodoService} from 'src/app/services/todo.service';
 import { Location } from '@angular/common';
+import { faSort, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-todo',
@@ -16,6 +17,9 @@ export class TodoComponent implements OnInit {
   emptyTodo!: Todo;
   errMsg: string = '';
   previousUrl: string='';
+  // FontAwesome
+  faSort = faSort;
+  faPlus = faPlus;
 
 
 
