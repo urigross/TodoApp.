@@ -1,5 +1,5 @@
 <form (submit)="onSave()" #f="ngForm" class="todo-edit" *ngIf="todo; else loader">
-    <a routerLink="/">x</a>
+    <a routerLink="/"><fa-icon  [icon]="faWindowClose" class="fa-lg"></fa-icon></a>
     <div class="title-container">
         <label for="title">Title</label>
         <input type="text" id="title" placeholder="Add your todo here..." [(ngModel)]="todo.title" name="title" #title="ngModel" minlength="3" required>
