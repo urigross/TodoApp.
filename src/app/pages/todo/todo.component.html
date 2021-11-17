@@ -1,4 +1,4 @@
-<section class="todo-app-container max-width">
+<section *ngIf="todos$" class="todo-app-container max-width">
     <!-- <app-todo-filter *ngIf="isShown"></app-todo-filter> -->
     <app-todo-filter></app-todo-filter>
     <!-- <button class="add-btn" *ngIf="isShown; else elseBlock" (click)="loadEmptyTodo(); isShown=!isShown">Add Todo old</button> -->

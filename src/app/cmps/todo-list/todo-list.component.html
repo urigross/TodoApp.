@@ -1,6 +1,12 @@
-<div class="todo-list">
-    <!-- <app-todo-preview *ngFor="let todo of todos; index as idx; trackBy:trackByFn" [todo]="todo" [isAddTodo]="isAddTodo"  -->
-    <!-- <app-todo-preview *ngFor="let todo of todos; index as idx; trackBy:trackByFn" [todo]="todo" [isEditTodo]="isEditTodo"  -->
-    <app-todo-preview *ngFor="let todo of todos; index as idx; trackBy:trackByFn" [todo]="todo"
+<!-- <div class="todo-list"> -->
+<!-- <app-todo-preview *ngFor="let todo of todos; index as idx; trackBy:trackByFn" [todo]="todo" [isAddTodo]="isAddTodo"  -->
+<!-- <app-todo-preview *ngFor="let todo of todos; index as idx; trackBy:trackByFn" [todo]="todo" [isEditTodo]="isEditTodo"  -->
+<!-- <app-todo-preview *ngFor="let todo of todos; index as idx; trackBy:trackByFn" [todo]="todo"
     (onIdToRemove)="onIdToRemove.emit($event)" (onToggleIsDone)="onToggleIsDone.emit($event)"></app-todo-preview>
+</div> -->
+<div cdkDropList class="todo-list" (cdkDropListDropped)="drop($event)">
+    <div class="todo-box" *ngFor="let todo of todos" cdkDrag>
+        <div class="todo-custom-placeholder" *cdkDragPlaceholder></div>
+        <app-todo-preview [todo]="todo" (onIdToRemove)="onIdToRemove.emit($event)" (onToggleIsDone)="onToggleIsDone.emit($event)"></app-todo-preview>
+    </div>
 </div>
