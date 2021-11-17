@@ -56,10 +56,10 @@
 
 @media (max-width: 1300px) {
     .todo-app-container {
-        .upper-section {
-            height: 180px;
-            padding-left: 0px;
-        }
+        // .upper-section {
+        //     height: 180px;
+        //     padding-left: 0px;
+        // }
         .content-btn {
             margin-right: 28px;
         }
@@ -112,10 +112,10 @@
 
 @media only screen and (max-width: 420px) and (max-height: 740px) {
     .todo-app-container {
-        .upper-section {
-            height: 148px;
-            width: 380px;
-        }
+        // .upper-section {
+        //     height: 148px;
+        //     width: 380px;
+        // }
     }
 }
 
@@ -129,9 +129,8 @@
 @media only screen and (max-width: 385px) and (max-height: 680px) {
     .todo-app-container {
         height: 513px;
-        .upper-section {
-            padding-left: 10px;
-        }
+
+        
     }
 }
 
@@ -151,9 +150,9 @@
         .add-btn {
             margin-bottom: 20px;
         }
-        .upper-section {
-            padding-left: 15px;
-        }
+        // .upper-section {
+        //     padding-left: 15px;
+        // }
     }
 }
 
@@ -168,6 +167,7 @@
 @media only screen and (max-width: 325px) {
     .todo-app-container {
         height: 377px;
+        margin-bottom: 100px;
         .sort-btn-container {
             display: flex;
             justify-content: space-evenly;
@@ -183,8 +183,8 @@
                 min-width: 40px;
             }
         }
-        .upper-section {
-            width: 315px;
-        }
+        // .upper-section {
+        //     width: 315px;
+        // }
     }
 }
