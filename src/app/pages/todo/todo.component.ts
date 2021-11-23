@@ -4,7 +4,7 @@ import {Observable, Subscription} from 'rxjs';
 import {Todo} from 'src/app/models/todo.model';
 import {TodoService} from 'src/app/services/todo.service';
 import { Location } from '@angular/common';
-import { faSort, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSort, faPlus, faDizzy } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-todo',
@@ -20,10 +20,7 @@ export class TodoComponent implements OnInit {
   // FontAwesome
   faSort = faSort;
   faPlus = faPlus;
-
-
-
-  // yoava: bad name, is what shown? isFilterShown
+  faDizzy = faDizzy;
   isAddTodo: boolean = false;
   isEditTodo: boolean = false;
 
