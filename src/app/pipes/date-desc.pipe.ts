@@ -12,6 +12,7 @@ export class DateDescPipe implements PipeTransform {
     if (diff < 1000 * 60 * 60) return 'Just now';
     if (diff < 1000 * 60 * 60 * 24 + 1000) return 'Today';
     if (diff < 1000 * 60 * 60 * 24 * 7) return 'This week';
-    return 'At: ' + date;
+    
+    return  date.toDateString();
   }
 }
