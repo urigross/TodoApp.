@@ -1,17 +1,13 @@
 ## Whats planned for this project:
 
-0. Save edits with AutoFocus.
-1. Drag and drop functionality.
-2. More css improvements.
-3. roboto font.
-4. Fontawesome.
+0. Change Detection
+1. Message Service
 
 
 ## Near future tasks:
 0. http service
-1. CD.
-2. State & NgRX.
-3. Backend
+1. State & NgRX.
+2. Backend
 
 # TodoList
 Check at todo-resolver service how to get rid of resolve type any.
