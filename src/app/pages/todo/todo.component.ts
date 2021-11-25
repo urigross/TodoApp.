@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {Todo} from 'src/app/models/todo.model';
@@ -9,7 +9,8 @@ import { faSort, faPlus, faDizzy } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+  styleUrls: ['./todo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoComponent implements OnInit {
   todos$!: Observable<Todo[]>;

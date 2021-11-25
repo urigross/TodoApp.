@@ -2,6 +2,7 @@
 
 0. Change Detection
 1. Message Service
+2. fix sorting first click on ABC and on lvl. Keep sorting state.
 
 
 ## Near future tasks:

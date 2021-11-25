@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
@@ -8,7 +8,8 @@ import { faWindowClose } from '@fortawesome/free-regular-svg-icons';
 @Component({
   selector: 'app-todo-edit',
   templateUrl: './todo-edit.component.html',
-  styleUrls: ['./todo-edit.component.scss']
+  styleUrls: ['./todo-edit.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoEditComponent implements OnInit {
   constructor(private route: ActivatedRoute, private todoService: TodoService, private router: Router) { }
