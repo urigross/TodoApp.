@@ -14,6 +14,7 @@ import { TodoEditComponent } from './pages/todo-edit/todo-edit.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DateDescPipe } from './pipes/date-desc.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     TodoPreviewComponent,
     TodoFilterComponent,
     AboutComponent,
+    DateDescPipe,
   ],
   imports: [
     BrowserModule,

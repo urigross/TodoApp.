@@ -6,7 +6,8 @@
             <a [routerLink]="['/edit/',todo._id]" class="todo-content">
                 <li>{{todo.title}}</li>
             </a>
-            <li class="todo-date">Created: {{todo.date | date:'short' }}</li>
+            <!-- <li class="todo-date">Created: {{todo.date | date:'short' }}</li> -->
+            <li class="todo-date">Created: {{todo.date | dateDesc }}</li>
             <li (click)="ontoggleCompleted()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
             <li class="todo-importance">Level: {{todo.importance}}</li>
             <!-- remove btn -->
