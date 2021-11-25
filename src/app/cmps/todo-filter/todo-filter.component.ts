@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {FilterBy} from 'src/app/models/filterBy.model';
 import {TodoService} from 'src/app/services/todo.service';
@@ -6,7 +6,8 @@ import {TodoService} from 'src/app/services/todo.service';
 @Component({
   selector: 'app-todo-filter',
   templateUrl: './todo-filter.component.html',
-  styleUrls: ['./todo-filter.component.scss']
+  styleUrls: ['./todo-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoFilterComponent implements OnInit {
 
