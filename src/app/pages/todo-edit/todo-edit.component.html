@@ -8,9 +8,9 @@
     <div class="importance-container">
         <label for="importance">Importance</label>
         <select name="importance" id="importance" [(ngModel)]="todo.importance">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>
         </select>
     </div>
     <div class="status-container">
