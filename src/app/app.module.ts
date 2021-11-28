@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DateDescPipe } from './pipes/date-desc.pipe';
+import { InputBackclrDirective } from './directives/input-backclr.directive';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DateDescPipe } from './pipes/date-desc.pipe';
     TodoFilterComponent,
     AboutComponent,
     DateDescPipe,
+    InputBackclrDirective,
   ],
   imports: [
     BrowserModule,
