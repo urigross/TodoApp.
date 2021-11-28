@@ -98,7 +98,7 @@ export class TodoService {
 
   public setSort(term: string): void {
     const sortBy: SortBy = this._sortBy$.getValue();
-    // If the term is being presses more that once - Change sorting direction
+    // If the term is pressed more that once - Change sorting direction
     if (term === sortBy.term) {
       sortBy.isAscending = !sortBy.isAscending;
     }
@@ -159,11 +159,20 @@ export class TodoService {
     })
   }
 
+  private _sortByImportance(todos: Todo[], sortBy: SortBy): Todo[] {
+    return todos.sort((a,b) =>{
+      if ((a as any)[sortBy.term] < (b as any)[sortBy.term]) return sortBy.isAscending ? -1 : 1;
+      if (a.importance > b.importance) return sortBy.isAscending ? 1 : -1;
+      return 0;
+    })
+  }
+
   // TODO:learn how to make this more effective
   private _sort(todos: Todo[], sortBy: SortBy): Todo[] {
     if (sortBy.term === "title") return this._sortByTitle(todos, sortBy.isAscending)
     if (sortBy.term === "date") return this._sortByNumer(todos, sortBy)
     if (sortBy.term === "isDone") return this._sortByBoolean(todos, sortBy)
+    if (sortBy.term === "importance") return this._sortByImportance(todos, sortBy);
     else return this._sortByTitle(todos, sortBy.isAscending);
   }
 }
