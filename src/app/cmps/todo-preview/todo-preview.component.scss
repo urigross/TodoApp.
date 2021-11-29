@@ -19,6 +19,11 @@
             a {
                 width: 350px;
                 color: inherit;               
+                li{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
         }
             .todo-date {
                 width: 250px;
@@ -39,15 +44,10 @@
         width: 80px;
         height: 28px;
         border: none;
-        // border-radius: 50px;
         font-size: 14px;
         opacity: 0.5;
-        // border: 2px;
-        // border-style: outset;
+
     }
-    // button::after {
-    //     content: "remove";
-    // }
 }
 
 .todo-preview.done {
@@ -89,9 +89,6 @@
                 padding: 3px;
                 line-height: 15px;
             }
-            // button::after {
-            //     content: "x";
-            // }
         }
     }
 }
