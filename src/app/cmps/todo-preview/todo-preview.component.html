@@ -1,12 +1,10 @@
 <!-- detailed todo with edit btn -->
 <div class="todo-preview-container">
-    <!-- <div class="preview-ctr" *ngIf="!isEditTodo; else editRoute"> -->
     <div class="preview-ctr" >
         <ul class="todo-preview"  class=" todo {{ (todo.isDone ? 'done' : '') }}">
             <a [routerLink]="['/edit/',todo._id]" class="todo-content">
                 <li>{{todo.title}}</li>
             </a>
-            <!-- <li class="todo-date">Created: {{todo.date | date:'short' }}</li> -->
             <li class="todo-date">Created: {{todo.date | dateDesc }}</li>
             <li (click)="ontoggleCompleted()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
             <li class="todo-importance">Level: {{todo.importance}}</li>
@@ -14,7 +12,4 @@
         </ul>
         <button (click)="onIdToRemove.emit(todo._id)"><fa-icon [icon]="faTrash"></fa-icon></button>
     </div>
-    <!-- <ng-template #editRoute> -->
-        <!-- <router-outlet></router-outlet> -->
-    <!-- </ng-template> -->
 </div>

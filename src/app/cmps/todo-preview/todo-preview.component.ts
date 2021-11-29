@@ -11,7 +11,6 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class TodoPreviewComponent   {
 
   @Input() todo!: Todo;
-  // @Input() isEditTodo:boolean = false; 
   @Output() onIdToRemove = new EventEmitter<string>();
   @Output() onToggleIsDone = new EventEmitter<Todo>();
   errMsg: string = '';
