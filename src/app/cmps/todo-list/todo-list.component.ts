@@ -18,6 +18,6 @@ export class TodoListComponent {
     moveItemInArray(this.todos!, event.previousIndex, event.currentIndex);
   }
   trackByFn(idx: any, todo: Todo) {
-    return todo._id;
+    return todo? todo._id: undefined;
   }
 }
