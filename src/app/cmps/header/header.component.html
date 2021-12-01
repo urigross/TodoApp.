@@ -1,7 +1,16 @@
-<section class="header max-width">
-    <h1>TodoApp</h1>
-    <nav>
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Todo App</a>
-        <a routerLink="/about" routerLinkActive="active">About</a>
-    </nav>
-</section>
+<nav>
+    <div class="nav-container max-width">
+        <h1 class="logo">Todo<span>App</span></h1>
+        <ul>
+            <li>
+                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Todo<span>App</span></a>
+            </li>
+            <li>
+                <a routerLink="/about" routerLinkActive="active">About</a>
+            </li>
+        </ul>
+        <!-- <div class="menu-btn">
+            <fa-icon [icon]="faBars"></fa-icon>
+        </div> -->
+    </div>
+</nav>

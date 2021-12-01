@@ -55,8 +55,8 @@ $todo-list-theme: mat.define-light-theme((
       box-sizing: border-box;
   }
   .max-width {
-    max-width: 1300px;
-    padding: 0 80px;
+    max-width: 1045px;
+    padding: 0;
     margin: auto;
   }
   
@@ -69,7 +69,6 @@ $todo-list-theme: mat.define-light-theme((
 @media (max-width: 1300px){
   .max-width {
     max-width: 870px;
-    padding: 0;  
   }
 }
 
