@@ -1,102 +1,103 @@
-    @media (max-width: 3000px) {
-        .header {
-            height: 140px;
-            background-color: black;
-            border-color: #f1f6ed;
-            box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
-            margin-bottom: 50px;
-            width: 1045px;
-            h1 {
-                text-align: center;
-                height: 100px;
-                line-height: 100px;
+    nav {
+    .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .logo {
+            background-image: linear-gradient(45deg, wheat, crimson);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-background-clip: text;
+            -moz-text-fill-color: transparent;
+        }
+        ul {
+            li {
+                display: inline-block;
+                a {
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 500;
+                    margin-inline-start: 25px;
+                    padding: .75rem 0;
+                    transition: .3s ease-in-out;
+                }
             }
         }
+        .menu-btn{
+            display: none;
+            font-size: 23px;
+        }
+    }
+    .nav-container ul li a:hover {
+        color: crimson;
+    }
+}
+
+@media (max-width: 3000px) {
+    nav {
+        .nav-container {
+            .logo {
+                font-size: 3.5em;
+            }
+            ul {
+                li {
+                    display: inline-block;
+                    &>.active {
+                        border-bottom: 2px solid wheat;
+                        transition: all 0.3s ease;
+                        border-color: crimson;
+                    }
+                    &>.active:hover {}
+                }
+            }
+        }
+    }
+    @media (max-width: 991px) {
         nav {
-            padding: 10px;
-            display: flex;
-            grid-gap: 20px;
-            &>.active {
-                color: #f53c76;
-                font-weight: bold;
+            .nav-container{
+                ul {
+                    li {
+                        display: block;
+                        a {
+                            display: inline-block;
+                        }
+                    }
+                }
             }
         }
     }
-    
-    @media (max-width: 1300px) {
-        .header {
-            width: 860px;
-        }
-    }
-    
-    @media (max-width: 960px) {
-        .header {
-            width: 558px;
-            nav{
-                justify-content: center;
-            }
-        }
-    }
-    
-    @media (max-width:615px) {
-        .header {
-            width: 450px;
+}
 
-        }
-    }
-    
-    @media (max-width:500px) {
-        .header {
-            width: 380px;
-        }
-    }
-    
-    @media (max-width:420px) {
-        .header {
-            width: 100%;
-            h1{
-                margin-bottom: 0;
-            }
-        }
-        nav {
-            justify-content: center;
-        }
-    }
-    @media only screen and (max-width: 420px) and (max-height: 740px)  {
-        .header{
-            height: 90px;
-            h1{
+@media (max-width: 947px){
+    nav{
+        .nav-container{
+            ul{
+                position: fixed;
+                height: 100vh;
+                width: 100%;
+                left: -100%;
+                top: 0;
+                background: #111;
                 text-align: center;
-                height: 50px;
-                line-height: 50px;
+                padding-top: 80px;  
+                transition: all 0.3s ease;
+                li{
+                    display: block;
+                    a{
+                        display: inline-block;
+                        margin: 20px 0;
+                        font-size: 25px;
+                    }
+                }
             }
-        }
-
-    }
-
-    
-    @media (max-width:385px) {
-      .header{
-        height: 88px;
-        margin-bottom: 32px;
-        h1 {
-            height: 33px;
-            line-height: 33px;
-            padding-top: 14px;
-            margin-bottom: 19px;
-        }
-      }
-    }
-    
-    @media (max-width:365px) {
-        .header {
-            height: 70px;
-            h1 {
-                height: 24px;
-                line-height: 24px;
-                margin-bottom: 13px;
+            ul.active{
+                left: 0;
+                z-index: 1;
+            }
+            .menu-btn {
+                display: block;
+                z-index: 999;
             }
         }
     }
-
-    
+}

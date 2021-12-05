@@ -18,13 +18,13 @@
         .todo-preview {
             a {
                 width: 350px;
-                color: inherit;               
-                li{
+                color: inherit;
+                li {
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                 }
-        }
+            }
             .todo-date {
                 width: 250px;
             }
@@ -39,19 +39,31 @@
             }
         }
     }
-
     button {
         width: 80px;
         height: 28px;
         border: none;
         font-size: 14px;
         opacity: 0.5;
-
     }
 }
 
 .todo-preview.done {
     text-decoration: line-through;
+}
+
+@media (max-width:3000px) {
+    .todo-preview-container {
+        .preview-ctr {
+            .todo-preview {
+                .todo-importance {
+                    span::before {
+                        content: 'level:';
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width:1300px) {
@@ -152,6 +164,12 @@
             .todo-preview {
                 .todo-content {
                     width: 178px;
+                }
+                .todo-importance{
+                    text-align: center;
+                    span{
+                        display: none;
+                    }
                 }
             }
         }

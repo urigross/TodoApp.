@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,4 +7,16 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
- }
+  faBars = faBars;
+  faTimes = faTimes;
+  mobileMenuOn= false;
+// Because the dual layout (mobile + desktop) of menu - Couldn't use toggleMenu
+  onOpenMenu(){
+    this.mobileMenuOn = true;
+  }
+  onCloseMenu(){
+    this.mobileMenuOn = false;
+  }
+}
+
+
