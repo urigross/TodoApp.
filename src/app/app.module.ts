@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TodoComponent } from './pages/todo/todo.component';
 import { HeaderComponent } from './cmps/header/header.component';
-import { FooterComponent } from './cmps/footer/footer.component';
 import { TodoListComponent } from './cmps/todo-list/todo-list.component';
 import { TodoPreviewComponent } from './cmps/todo-preview/todo-preview.component';
 import { TodoFilterComponent } from './cmps/todo-filter/todo-filter.component';
@@ -23,7 +22,6 @@ import { InputBackclrDirective } from './directives/input-backclr.directive';
     TodoComponent,
     TodoEditComponent,
     HeaderComponent,
-    FooterComponent,
     TodoListComponent,
     TodoPreviewComponent,
     TodoFilterComponent,

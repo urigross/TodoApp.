@@ -1,6 +1,9 @@
 <nav>
     <div class="nav-container max-width">
-        <h1 class="logo">Todo<span>App</span></h1>
+        <div class="logo-container">
+            <h1 class="logo">Todo<span>App</span></h1>
+            <span class="logo-span">By Uri Gross</span>
+        </div>
         <ul [ngClass]="mobileMenuOn?'active':''">
             <li>
                 <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="onCloseMenu()">Todo<span>App</span></a>
