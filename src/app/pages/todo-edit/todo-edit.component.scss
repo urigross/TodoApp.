@@ -31,6 +31,7 @@ a{
                 width: 550px;
             }
             input{
+                font-size: 16px;
                 padding: 0 10px;
             }
             ::placeholder{
@@ -69,6 +70,9 @@ a{
             display: inline-block;
             button{
                 width: 153px;
+                height: 27px;
+                font-size: 16px;
+                border-radius: 4px;
             }
         }
         input{
