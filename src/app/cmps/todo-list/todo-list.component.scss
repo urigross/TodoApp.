@@ -1,24 +1,18 @@
 // Draggable sort serction
 .todo-list {
-    // width: 500px;
     max-width: 100%;
-    // border: solid 1px #ccc;
     min-height: 60px;
     display: block;
-    // background: white;
     border-radius: 4px;
-    overflow: hidden;
+    // overflow: hidden;
   }
   
   .todo-box {
-    // padding: 20px 10px;
-    // border-bottom: solid 1px #ccc;
     display: flex;
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;
     cursor: move;
-    // background: white;
     font-size: 14px;
   }
   
@@ -43,7 +37,6 @@
   }
   
   .todo-custom-placeholder {
-    // background: #ccc;
     border: dotted 3px #999;
     min-height: 60px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
@@ -52,7 +45,7 @@
 @media (max-width: 3000px){
     .todo-list{
         height: 484px;
-        overflow: auto;
+        // overflow: auto;
 
     }
 }
@@ -103,10 +96,3 @@
         height: 198px;
     }
 }
-
-
-// @media (max-width: 385px){
-//     .todo-list{
-//         width: 310px;
-//     }
-// }
