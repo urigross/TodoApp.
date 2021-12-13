@@ -24,6 +24,7 @@ export class TodoComponent implements OnInit {
   faDizzy = faDizzy;
   isAddTodo: boolean = false;
   isEditTodo: boolean = false;
+  isDraggble = false;
 
   constructor(private todoService: TodoService, location: Location, router: Router) {
     router.events.subscribe(val=>{
@@ -36,10 +37,6 @@ export class TodoComponent implements OnInit {
         this.isAddTodo = false;
         this.isEditTodo = false;
       }
-      // if(urlPath.includes('/edit/')){
-      //   this.isEditTodo = true;
-      // }
-     //TODO: complete if with editable: id with params!
     })
   }
 
@@ -55,16 +52,9 @@ export class TodoComponent implements OnInit {
     this._saveTodo(data);
     
   }
-
-  // onIsShown(data: boolean): void {
-  //   this.isShown = data;
-  //   this.todos$ = this.todoService.query();
-  // }
   ngOnInit(): void {
     console.log('todo component on init')
-    //this.todos$ = this.todoService.todos$;
     this.todos$ = this.todoService.query();
-    //console.log(this.todoService.todos$)
     this.loadEmptyTodo();
   }
 
