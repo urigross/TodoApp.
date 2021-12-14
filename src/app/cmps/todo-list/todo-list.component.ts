@@ -10,6 +10,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoListComponent {
+  @Input() isDraggble:boolean=false;
   @Input() todos!: Todo[] | null;
   @Output() onSelectTodo = new EventEmitter<string>();
   @Output() onIdToRemove = new EventEmitter<string>();

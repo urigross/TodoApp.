@@ -11,12 +11,13 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class TodoPreviewComponent   {
 
   @Input() todo!: Todo;
+  @Input() isDraggble: boolean = false;
   @Output() onIdToRemove = new EventEmitter<string>();
   @Output() onToggleIsDone = new EventEmitter<Todo>();
   errMsg: string = '';
   // FontAwesome icons
   faTrash = faTrash;
-  ontoggleCompleted() {
+  ontoggleCompletedTodo() {
     // toggle the completed todo
     this.todo.isDone = !this.todo.isDone;
     // send the modified todo to the todo-app component.

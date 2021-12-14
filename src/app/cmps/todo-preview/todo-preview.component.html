@@ -1,12 +1,15 @@
-<!-- detailed todo with edit btn -->
-<div class="todo-preview-container">
-    <div class="preview-ctr" >
-        <ul class="todo-preview"  class=" todo {{ (todo.isDone ? 'done' : '') }}">
+<!-- todo preview with edit btn, remove btn, completed btn -->
+<!-- On draggble mode - Clicks are disabled -->
+<div class="todo-preview-container {{(isDraggble? 'disabled': '')}}">
+    <div class="preview-ctr">
+        <ul class="todo-preview" class=" todo {{ (todo.isDone ? 'done' : '') }}">
+            <!-- edit routerlink -->
             <a [routerLink]="['/edit/',todo._id]" class="todo-content">
                 <li>{{todo.title}}</li>
             </a>
             <li class="todo-date">Created: {{todo.date | dateDesc }}</li>
-            <li (click)="ontoggleCompleted()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
+            <!-- complete btn -->
+            <li (click)="ontoggleCompletedTodo()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
             <li class="todo-importance"><span></span>{{todo.importance}}</li>
             <!-- remove btn -->
         </ul>
