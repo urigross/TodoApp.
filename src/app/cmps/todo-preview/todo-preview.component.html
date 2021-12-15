@@ -10,7 +10,9 @@
             <li class="todo-date">Created: {{todo.date | dateDesc }}</li>
             <!-- complete btn -->
             <li (click)="ontoggleCompletedTodo()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
-            <li class="todo-importance"><span></span>{{todo.importance}}</li>
+            <a [routerLink]="['/edit/',todo._id]" class="todo-importance">
+                <li><span></span>{{todo.importance}}</li>
+            </a>
             <!-- remove btn -->
         </ul>
         <button (click)="onIdToRemove.emit(todo._id)"><fa-icon [icon]="faTrash"></fa-icon></button>

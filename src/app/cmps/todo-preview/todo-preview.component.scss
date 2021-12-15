@@ -2,6 +2,7 @@
     pointer-events:none;
 }
 .todo-preview-container {
+    cursor: default;
     ul {
         font-size: 16px;
         display: flex;
@@ -18,6 +19,7 @@
         margin-top: 2px;
         height: 47px;
         line-height: 28px;
+        cursor: default;
         .todo-preview {
             a {
                 width: 350px;
@@ -32,6 +34,7 @@
                 width: 250px;
             }
             .todo-status {
+                cursor: pointer;
                 width: 140px;
                 span {
                     color: crimson;
@@ -48,6 +51,7 @@
         border: none;
         font-size: 14px;
         opacity: 0.5;
+        cursor: pointer;
     }
 }
 
