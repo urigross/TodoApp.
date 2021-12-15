@@ -4,7 +4,6 @@
     min-height: 60px;
     display: block;
     border-radius: 4px;
-    // overflow: hidden;
 }
 
 .draggble{
@@ -20,7 +19,6 @@
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;
-    // cursor: move;
     cursor: inherit;
     font-size: 14px;
 }
@@ -45,23 +43,15 @@
     }
     
     .todo-custom-placeholder {
-      cursor: grabbing;
+    cursor: grabbing;
     border: dotted 3px #999;
     min-height: 60px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
 
-@media (max-width: 3000px){
-    .todo-list{
-        // height: 484px;
-        // overflow: auto;
-
-    }
-}
 
 @media (max-width: 1300px){
     .todo-list{
-        // height: 443px;
         width: 884px;
         margin-left: 24px;
     }
@@ -77,31 +67,18 @@
     }
 }
 
-@media (max-width: 600px){
-    .todo-list{
-        // height: 345px;
-    }
-}
+
 
 @media (max-width: 385px) and (min-height: 800px){
-    .todo-list{
-        // height: 443px;
-    }
     .todo-box{
         justify-content: center;
 
     }
 }
 
-@media (max-width: 385px){
-    .todo-list{
-        // width: 385px;
-    }
-}
 
 @media (max-width: 325px){
     .todo-list{
         width: 310px;
-        // height: 198px;
     }
 }
