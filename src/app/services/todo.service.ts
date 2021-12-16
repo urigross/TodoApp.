@@ -6,11 +6,11 @@ import { Todo } from '../models/todo.model';
 import { utilService } from './util.service';
 
 const TODOS: Todo[] = [
-  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1 },
-  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2 },
-  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 },
-  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3 },
-  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
+  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1, category: 'office' },
+  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2, category: 'home' },
+  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 , category: 'general'},
+  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, category: 'home'},
+  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3, category: 'home' },
 ]
 
 @Injectable({
@@ -67,7 +67,7 @@ export class TodoService {
   }
 
   getEmptyTodo(): Todo {
-    return { _id: '', title: '', date: new Date(), isDone: false, importance: 1 }
+    return { _id: '', title: '', date: new Date(), isDone: false, importance: 1 ,category: 'general' }
   }
 
   //Action functions
@@ -115,6 +115,7 @@ export class TodoService {
     console.log('entered _add in todo-service')
     const todos = this._todos$.getValue();
     todo._id = utilService.makeId();
+    todo.category = 'general';
     todos.push(todo);
     utilService.save(this.KEY, todos);
     console.log('load from local storage to check reading:', utilService.load(this.KEY))
@@ -167,7 +168,6 @@ export class TodoService {
     })
   }
 
-  // TODO:learn how to make this more effective
   private _sort(todos: Todo[], sortBy: SortBy): Todo[] {
     if (sortBy.term === "title") return this._sortByTitle(todos, sortBy.isAscending)
     if (sortBy.term === "date") return this._sortByNumer(todos, sortBy)
