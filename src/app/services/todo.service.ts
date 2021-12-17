@@ -21,15 +21,13 @@ export class TodoService {
   private KEY: string = 'todosDB';
   private _todos$ = new BehaviorSubject<Todo[]>([]);
 
-  // this is an Observable - we CANNOT do .next.
-  // It acts like a getter - You can list to it's changes
   // this makes a good separation!
   public todos$ = this._todos$.asObservable();
 
   // yoava should filterBy$ and sortBy$ be in the service?
 
   // filter
-  private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '' });
+  private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '', category:'' });
   public filterBy$ = this._filterBy$.asObservable();
 
   // Sort
@@ -54,8 +52,8 @@ export class TodoService {
       utilService.save(this.KEY, todos);// Set storage to []
       console.log(`Expected results: Storage set with [], Actual results: Storage was set with ${todos}`);
     }
-    if (filterBy && filterBy.term) {
-      todos = this._filter(todos, filterBy.term)
+    if (filterBy && filterBy.term || filterBy.category) {
+      todos = this._filter(todos, filterBy.term, filterBy.category);
     }
     this._todos$.next(this._sort(todos, sortBy))
     return this._todos$;
@@ -133,9 +131,11 @@ export class TodoService {
     return of(todo);
   }
 
-  private _filter(todos: Todo[], term: string) {
+  private _filter(todos: Todo[], term: string, category: string) {
     term = term.toLocaleLowerCase();
-    return todos.filter(todo => todo.title.toLocaleLowerCase().includes(term))
+    return todos.filter(todo => 
+      todo.title.toLocaleLowerCase().includes(term) &&
+      todo.category === category);
   }
 
   private _sortByTitle(todos: Todo[], isAscending: boolean): Todo[] {
