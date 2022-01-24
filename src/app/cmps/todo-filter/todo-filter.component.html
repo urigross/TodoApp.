@@ -3,6 +3,6 @@
     <input type="text" id="title" name="term" [(ngModel)]="filterBy.term" (ngModelChange)="onSetFilter()" placeholder="Text to search...">
     <label for="category">Category:</label>
     <select name="category" id="category" [(ngModel)]="filterBy.category" (ngModelChange)="onSetFilter()">
-        <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+        <option *ngFor="let cat of categories" [value]="cat === 'All' ? '' : cat">{{cat}}</option>
     </select>
 </form>

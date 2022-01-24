@@ -19,7 +19,8 @@
 15. Sound effects.
 ## Near future tasks:
 
-0. Mobile UI fixes including footer removing and dev. name inside the logo.
+0. Categories service.
+01. SCSS fixes
 1. Message Service
 2. fix sorting first click on ABC and on lvl. Keep sorting state.
 3. mat icons - complete

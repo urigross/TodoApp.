@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Todo } from '../models/todo.model';
 import { TodoService } from './todo.service';
 
 @Injectable({
