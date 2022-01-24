@@ -13,6 +13,14 @@ const TODOS: Todo[] = [
   { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3, category: 'home' },
 ]
 
+// Mock data without categories
+const TODOS_MOCK_NO_CAT: object[] = [
+  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1},
+  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2, category: 'home' },
+  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3, category: 'general' },
+  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, category: 'home' },
+  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3, category: 'home' },
+]
 @Injectable({
   providedIn: 'root'
 })
@@ -40,6 +48,8 @@ export class TodoService {
   // yoava why public?
   //Query functions
   public query(): Observable<Todo[]> {
+    //utilService.save(this.KEY,TODOS_MOCK_NO_CAT);
+    this._patchDB();
     console.log('Entered query() on todo-service');
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
@@ -60,6 +70,25 @@ export class TodoService {
     this._todos$.next(this._sort(todos, sortBy))
     return this._todos$;
   }
+
+  // Run once to patch local storage without categories to gereral categories
+  private _patchDB() : void{
+    // Create backup of data
+    utilService.save('todoDB_BACK', utilService.load(this.KEY));
+    // Creating mock data without categories
+    const todos :object[] = TODOS_MOCK_NO_CAT;
+    // Patching todos added 'general' category where key is missing.
+    var patchedTodos: Todo [] = todos.map((todo:any)=>{
+      let rTodo = todo;
+      if(rTodo.category === undefined) {
+        rTodo.category = 'general';
+      } 
+      return rTodo;
+    })
+// Saving the patched todos
+   utilService.save(this.KEY, patchedTodos);
+  }
+  
 
   public getById(id: string): Todo | undefined {
     const todos = this._todos$.getValue();
