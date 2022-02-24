@@ -6,7 +6,7 @@ import { Todo } from '../models/todo.model';
 import { utilService } from './util.service';
 
 const TODOS: Todo[] = [
-  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1, category: 'office' },
+  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1, category: 'work'},
   { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2, category: 'home' },
   { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3, category: 'general' },
   { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, category: 'home' },
@@ -16,10 +16,10 @@ const TODOS: Todo[] = [
 // Mock data without categories
 const TODOS_MOCK_NO_CAT: object[] = [
   { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1},
-  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2, category: 'home' },
-  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3, category: 'general' },
-  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, category: 'home' },
-  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3, category: 'home' },
+  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2 },
+  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 },
+  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3,  },
+  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
 ]
 @Injectable({
   providedIn: 'root'
@@ -57,11 +57,13 @@ export class TodoService {
     console.log('load from local storage to check reading:', utilService.load(this.KEY));
     console.log('todos on query()', todos);
     console.log('todos.length on query()', todos.length);
-    if (!todos.length) {
-      this._todos$.next(TODOS);
-      utilService.save(this.KEY, todos);// Set storage to []
-      console.log(`Expected results: Storage set with [], Actual results: Storage was set with ${todos}`);
-    }
+    // If you want to add todos if the LS with mock data if it's empty:
+    // if (!todos.length) {
+    //   this._todos$.next(TODOS);
+    //   utilService.save(this.KEY,TODOS); // Fill LS with mock
+    //   //utilService.save(this.KEY, []);// Set storage to []
+    //   // console.log(`Expected results: Storage set with [], Actual results: Storage was set with ${todos}`);
+    // }
     if (filterBy && filterBy.term || filterBy.category) {
       console.log('todo service - query() todos when there is valid filter term:', todos);
       todos = this._filter(todos, filterBy.term, filterBy.category);
@@ -74,9 +76,9 @@ export class TodoService {
   // Run once to patch local storage without categories to gereral categories
   private _patchDB() : void{
     // Create backup of data
-    utilService.save('todoDB_BACK', utilService.load(this.KEY));
-    // Creating mock data without categories
-    const todos :object[] = TODOS_MOCK_NO_CAT;
+    utilService.save('todoDB_BACK', utilService.load(this.KEY));    
+    // Load todosDB from Local storage for patching.
+    const todos :object[] = utilService.load(this.KEY);
     // Patching todos added 'general' category where key is missing.
     var patchedTodos: Todo [] = todos.map((todo:any)=>{
       let rTodo = todo;
@@ -96,7 +98,7 @@ export class TodoService {
   }
 
   getEmptyTodo(): Todo {
-    return { _id: '', title: '', date: new Date(), isDone: false, importance: 1, category: 'general' }
+    return { _id: '', title: '', date: new Date(), isDone: false, importance: 0, category: 'general' }
   }
 
   //Action functions

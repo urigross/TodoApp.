@@ -1,5 +1,7 @@
 ## Whats planned for this project:
 
+01. Bug fix - New todo: 0 char on title field no visual error message.
+02. Bug fix - New todo: Show error when no importancy lvl choosen. 
 0. http service
 1. State & NgRX.
 2. Backend
