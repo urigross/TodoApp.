@@ -8,11 +8,19 @@
     <div class="importance-container">
         <label for="importance">Importance</label>
         <select name="importance" id="importance" [(ngModel)]="todo.importance">
-                <option [ngValue]="1">1</option>
+            <option *ngFor="let importancy of importanceArr" [ngValue]="importancy">{{importancy}}</option>    
+            <!-- <option [ngValue]="1">1</option>
                 <option [ngValue]="2">2</option>
-                <option [ngValue]="3">3</option>
+                <option [ngValue]="3">3</option> -->
         </select>
     </div>
+    <!-- <div class="category-container">
+        <label for="category">Category</label>
+        <select name="category" id="category"[(ngModel)]="todo.category">
+            <option [ngValue]="general">General</option>
+            <option [ngValue]="private">Private</option>
+        </select>
+    </div> -->
     <div class="status-container">
         <label for="importance">Status</label>
         <select name="isDone" id="isDone" [(ngModel)]="todo.isDone">

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, Input} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {FilterBy} from 'src/app/models/filterBy.model';
 import {TodoService} from 'src/app/services/todo.service';
@@ -10,15 +10,18 @@ import {TodoService} from 'src/app/services/todo.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoFilterComponent implements OnInit {
-
-  public filterBy: FilterBy = {term:''};
+  
+  public filterBy: FilterBy = {term:'', category:''};
   private subscription!: Subscription;
-
+  public categories: string[] = ['All','general','home','work'];
+  
+  
   constructor(private todoService: TodoService) {
   }
-
+  
   //
   onSetFilter(): void {
+    console.log('setfilterby:',this.filterBy)
     this.todoService.setFilter(this.filterBy)
   }
 

@@ -17,6 +17,7 @@ export class TodoEditComponent implements OnInit {
   todo: Todo = this.todoService.getEmptyTodo();
   subscription!: Subscription;
   errMsg: string ='';
+  importanceArr:string [] = ['1','2','3'];
   // FontAwesome icons
   faWindowClose = faWindowClose;
 
@@ -32,7 +33,7 @@ export class TodoEditComponent implements OnInit {
   }
   async onSave(){
     try{
-      console.log('Entered onSave() @todo-edit.component');
+      console.log('Entered onSave() todo-edit.component with todo:',this.todo);
       await this.todoService.save(this.todo).toPromise();
       this.router.navigateByUrl('/')
     } catch (err){

@@ -1,5 +1,7 @@
 ## Whats planned for this project:
 
+01. Bug fix - New todo: 0 char on title field no visual error message.
+02. Bug fix - New todo: Show error when no importancy lvl choosen. 
 0. http service
 1. State & NgRX.
 2. Backend
@@ -19,7 +21,8 @@
 15. Sound effects.
 ## Near future tasks:
 
-0. Mobile UI fixes including footer removing and dev. name inside the logo.
+0. Categories service.
+01. SCSS fixes
 1. Message Service
 2. fix sorting first click on ABC and on lvl. Keep sorting state.
 3. mat icons - complete

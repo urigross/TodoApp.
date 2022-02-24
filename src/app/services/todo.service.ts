@@ -6,30 +6,36 @@ import { Todo } from '../models/todo.model';
 import { utilService } from './util.service';
 
 const TODOS: Todo[] = [
-  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1, category: 'office' },
+  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1, category: 'work'},
   { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2, category: 'home' },
-  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 , category: 'general'},
-  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, category: 'home'},
+  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3, category: 'general' },
+  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, category: 'home' },
   { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3, category: 'home' },
 ]
 
+// Mock data without categories
+const TODOS_MOCK_NO_CAT: object[] = [
+  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1},
+  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2 },
+  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 },
+  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3,  },
+  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
+]
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  // this is BehaviorSubject - Can get .next and getValue()
   private KEY: string = 'todosDB';
+  // this is BehaviorSubject - Can get .next and getValue()
   private _todos$ = new BehaviorSubject<Todo[]>([]);
 
-  // this is an Observable - we CANNOT do .next.
-  // It acts like a getter - You can list to it's changes
   // this makes a good separation!
   public todos$ = this._todos$.asObservable();
 
   // yoava should filterBy$ and sortBy$ be in the service?
 
   // filter
-  private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '' });
+  private _filterBy$ = new BehaviorSubject<FilterBy>({ term: '', category: '' });
   public filterBy$ = this._filterBy$.asObservable();
 
   // Sort
@@ -42,24 +48,49 @@ export class TodoService {
   // yoava why public?
   //Query functions
   public query(): Observable<Todo[]> {
+    //utilService.save(this.KEY,TODOS_MOCK_NO_CAT);
+    this._patchDB();
     console.log('Entered query() on todo-service');
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
-    let todos = utilService.load(this.KEY);
+    let todos: Todo[] = utilService.load(this.KEY);
     console.log('load from local storage to check reading:', utilService.load(this.KEY));
     console.log('todos on query()', todos);
     console.log('todos.length on query()', todos.length);
-    if (!todos.length) {
-      this._todos$.next(TODOS);
-      utilService.save(this.KEY, todos);// Set storage to []
-      console.log(`Expected results: Storage set with [], Actual results: Storage was set with ${todos}`);
-    }
-    if (filterBy && filterBy.term) {
-      todos = this._filter(todos, filterBy.term)
+    // If you want to add todos if the LS with mock data if it's empty:
+    // if (!todos.length) {
+    //   this._todos$.next(TODOS);
+    //   utilService.save(this.KEY,TODOS); // Fill LS with mock
+    //   //utilService.save(this.KEY, []);// Set storage to []
+    //   // console.log(`Expected results: Storage set with [], Actual results: Storage was set with ${todos}`);
+    // }
+    if (filterBy && filterBy.term || filterBy.category) {
+      console.log('todo service - query() todos when there is valid filter term:', todos);
+      todos = this._filter(todos, filterBy.term, filterBy.category);
+      console.log('todos after filtering', todos);
     }
     this._todos$.next(this._sort(todos, sortBy))
     return this._todos$;
   }
+
+  // Run once to patch local storage without categories to gereral categories
+  private _patchDB() : void{
+    // Create backup of data
+    utilService.save('todoDB_BACK', utilService.load(this.KEY));    
+    // Load todosDB from Local storage for patching.
+    const todos :object[] = utilService.load(this.KEY);
+    // Patching todos added 'general' category where key is missing.
+    var patchedTodos: Todo [] = todos.map((todo:any)=>{
+      let rTodo = todo;
+      if(rTodo.category === undefined) {
+        rTodo.category = 'general';
+      } 
+      return rTodo;
+    })
+// Saving the patched todos
+   utilService.save(this.KEY, patchedTodos);
+  }
+  
 
   public getById(id: string): Todo | undefined {
     const todos = this._todos$.getValue();
@@ -67,7 +98,7 @@ export class TodoService {
   }
 
   getEmptyTodo(): Todo {
-    return { _id: '', title: '', date: new Date(), isDone: false, importance: 1 ,category: 'general' }
+    return { _id: '', title: '', date: new Date(), isDone: false, importance: 0, category: 'general' }
   }
 
   //Action functions
@@ -133,9 +164,20 @@ export class TodoService {
     return of(todo);
   }
 
-  private _filter(todos: Todo[], term: string) {
+  private _filter(todos: Todo[], term: string, category: string): Todo[] {
     term = term.toLocaleLowerCase();
+    console.log('todos on _filter()', todos);
+    console.log('category on _filter()', category);
+    console.log('category on _filter()', category);
+    var todoTemp: Todo[] = this._filterByTerm(todos, term)
+    console.log('todoTemp',todoTemp);
+    return this._filterByCat(todoTemp, category);
+  }
+  private _filterByTerm(todos: Todo[], term: string): Todo[]{
     return todos.filter(todo => todo.title.toLocaleLowerCase().includes(term))
+  }
+  private _filterByCat(todos: Todo[], category: string): Todo[]{
+    return category ? todos.filter(todo => todo.category === category) : todos;    
   }
 
   private _sortByTitle(todos: Todo[], isAscending: boolean): Todo[] {
@@ -161,7 +203,7 @@ export class TodoService {
   }
 
   private _sortByImportance(todos: Todo[], sortBy: SortBy): Todo[] {
-    return todos.sort((a,b) =>{
+    return todos.sort((a, b) => {
       if ((a as any)[sortBy.term] < (b as any)[sortBy.term]) return sortBy.isAscending ? -1 : 1;
       if (a.importance > b.importance) return sortBy.isAscending ? 1 : -1;
       return 0;
