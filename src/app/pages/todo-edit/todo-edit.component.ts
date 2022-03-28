@@ -13,10 +13,11 @@ import { faWindowClose } from '@fortawesome/free-regular-svg-icons';
 })
 export class TodoEditComponent implements OnInit {
   constructor(private route: ActivatedRoute, private todoService: TodoService, private router: Router) { }
-  
+  //TODO: change this to initilize without empty todo
   todo: Todo = this.todoService.getEmptyTodo();
   subscription!: Subscription;
   errMsg: string ='';
+  selectedImortancy=1;
   importanceArr:string [] = ['1','2','3'];
   // FontAwesome icons
   faWindowClose = faWindowClose;

@@ -98,7 +98,7 @@ export class TodoService {
   }
 
   getEmptyTodo(): Todo {
-    return { _id: '', title: '', date: new Date(), isDone: false, importance: 0, category: 'general' }
+    return { _id: '', title: '', date: new Date(), isDone: false, importance: 1, category: 'general' }
   }
 
   //Action functions

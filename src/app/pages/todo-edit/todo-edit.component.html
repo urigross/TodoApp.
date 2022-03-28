@@ -1,5 +1,7 @@
 <form (submit)="onSave()" #f="ngForm" class="todo-edit" *ngIf="todo; else loader">
-    <a routerLink="/"><fa-icon  [icon]="faWindowClose" class="fa-lg"></fa-icon></a>
+    <a routerLink="/">
+        <fa-icon [icon]="faWindowClose" class="fa-lg"></fa-icon>
+    </a>
     <div class="title-container">
         <label for="title">Title</label>
         <input type="text" id="title" [inputBackclr]="todo.title" placeholder="Add your todo here..." [(ngModel)]="todo.title" name="title" #title="ngModel" minlength="3" required>
@@ -8,10 +10,14 @@
     <div class="importance-container">
         <label for="importance">Importance</label>
         <select name="importance" id="importance" [(ngModel)]="todo.importance">
-            <option *ngFor="let importancy of importanceArr" [ngValue]="importancy">{{importancy}}</option>    
-            <!-- <option [ngValue]="1">1</option>
-                <option [ngValue]="2">2</option>
-                <option [ngValue]="3">3</option> -->
+            <!-- <option [ngValue]="1" selected disabled>1</option> -->
+            <option 
+            *ngFor="let importancy of importanceArr; let i = index"
+            [value]="importancy" 
+            [selected]="i === 0">
+            {{importancy}}
+            </option>    
+
         </select>
     </div>
     <!-- <div class="category-container">
@@ -24,8 +30,8 @@
     <div class="status-container">
         <label for="importance">Status</label>
         <select name="isDone" id="isDone" [(ngModel)]="todo.isDone">
-                <option [ngValue]="true">Done</option>
-                <option [ngValue]="false">Active</option>
+                <option [value]="true">Done</option>
+                <option [value]="false">Active</option>
         </select>
     </div>
     <div class="save-btn">
