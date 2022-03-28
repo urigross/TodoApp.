@@ -3,34 +3,32 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FilterBy } from '../models/filterBy.model';
 import { SortBy } from '../models/sortBy.model';
 import { Todo } from '../models/todo.model';
-import { utilService } from './util.service';
-
-const TODOS: Todo[] = [
-  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1, category: 'work'},
-  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2, category: 'home' },
-  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3, category: 'general' },
-  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, category: 'home' },
-  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3, category: 'home' },
-]
-
-// Mock data without categories
-const TODOS_MOCK_NO_CAT: object[] = [
-  { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1},
-  { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2 },
-  { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 },
-  { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3,  },
-  { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
-]
+import { UtilService } from './util.service';
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private KEY: string = 'todosDB';
-  // this is BehaviorSubject - Can get .next and getValue()
+  private _defaultTodos: Todo[] = [
+    { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1, category: 'work' },
+    { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2, category: 'home' },
+    { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3, category: 'general' },
+    { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, category: 'home' },
+    { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3, category: 'home' },
+  ]
+  // Mock data without categories
+  private _TODOS_MOCK_NO_CAT: object[] = [
+    { _id: 'rwr32', title: 'Make a todo app', date: new Date('10/10/2021'), isDone: false, importance: 1 },
+    { _id: 'te906', title: 'Go surfing', date: new Date('1/9/2018'), isDone: true, importance: 2 },
+    { _id: 'rwras992', title: 'Go on a vication', date: new Date('5/5/2022'), isDone: false, importance: 3 },
+    { _id: 'afas22', title: 'Check stocks', date: new Date('5/9/2022'), isDone: false, importance: 3, },
+    { _id: 'dklj4665', title: 'Go jogging', date: new Date('5/1/2017'), isDone: false, importance: 3 },
+  ]
+  private _categories: string[] = ['general', 'programming', 'health', 'home', 'today', 'shufersal'];
+  private _KEY: string = 'todosDB';
   private _todos$ = new BehaviorSubject<Todo[]>([]);
 
   // this makes a good separation!
-  public todos$ = this._todos$.asObservable();
+  private todos$ = this._todos$.asObservable();
 
   // yoava should filterBy$ and sortBy$ be in the service?
 
@@ -48,20 +46,20 @@ export class TodoService {
   // yoava why public?
   //Query functions
   public query(): Observable<Todo[]> {
-    //utilService.save(this.KEY,TODOS_MOCK_NO_CAT);
-    this._patchDB();
+    //UtilService.save(this.KEY,TODOS_MOCK_NO_CAT);
+    // this._patchDB();
     console.log('Entered query() on todo-service');
     const filterBy = this._filterBy$.getValue();
     const sortBy = this._sortBy$.getValue();
-    let todos: Todo[] = utilService.load(this.KEY);
-    console.log('load from local storage to check reading:', utilService.load(this.KEY));
+    let todos: Todo[] = UtilService.load(this._KEY);
+    console.log('load from local storage to check reading:', UtilService.load(this._KEY));
     console.log('todos on query()', todos);
     console.log('todos.length on query()', todos.length);
-    // If you want to add todos if the LS with mock data if it's empty:
+    // Add todos to the LS with mock data if it's empty:
     // if (!todos.length) {
     //   this._todos$.next(TODOS);
-    //   utilService.save(this.KEY,TODOS); // Fill LS with mock
-    //   //utilService.save(this.KEY, []);// Set storage to []
+    //   UtilService.save(this.KEY,TODOS); // Fill LS with mock
+    //   //UtilService.save(this.KEY, []);// Set storage to []
     //   // console.log(`Expected results: Storage set with [], Actual results: Storage was set with ${todos}`);
     // }
     if (filterBy && filterBy.term || filterBy.category) {
@@ -73,24 +71,34 @@ export class TodoService {
     return this._todos$;
   }
 
-  // Run once to patch local storage without categories to gereral categories
-  private _patchDB() : void{
-    // Create backup of data
-    utilService.save('todoDB_BACK', utilService.load(this.KEY));    
-    // Load todosDB from Local storage for patching.
-    const todos :object[] = utilService.load(this.KEY);
-    // Patching todos added 'general' category where key is missing.
-    var patchedTodos: Todo [] = todos.map((todo:any)=>{
-      let rTodo = todo;
-      if(rTodo.category === undefined) {
-        rTodo.category = 'general';
-      } 
-      return rTodo;
-    })
-// Saving the patched todos
-   utilService.save(this.KEY, patchedTodos);
+  //Run once to patch local storage without categories to gereral categories
+  // private _patchDB(): void {
+  //   // Create backup of data
+  //   UtilService.save('todoDB_BACK', UtilService.load(this._KEY));
+  //   // Load todosDB from Local storage for patching.
+  //   const todos: object[] = UtilService.load(this._KEY);
+  //   // Patching todos added 'general' category where key is missing.
+  //   var patchedTodos: Todo[] = todos.map((todo: any) => {
+  //     let rTodo = todo;
+  //     if (rTodo.category === undefined) {
+  //       rTodo.category = 'general';
+  //     }
+  //     return rTodo;
+  //   })
+  //   //Saving the patched todos
+  //   UtilService.save(this._KEY, patchedTodos);
+  // }
+
+  getCategories(): string[] {
+    return this._categories;
   }
-  
+
+  getFilterCategories(): string[]{
+    console.log(this._categories);
+    let categories = JSON.parse(JSON.stringify(this._categories));
+    categories.unshift('all');
+    return categories;
+  }
 
   public getById(id: string): Todo | undefined {
     const todos = this._todos$.getValue();
@@ -98,7 +106,7 @@ export class TodoService {
   }
 
   getEmptyTodo(): Todo {
-    return { _id: '', title: '', date: new Date(), isDone: false, importance: 0, category: 'general' }
+    return { _id: '', title: '', date: new Date(), isDone: false, importance: 1, category: 'general' }
   }
 
   //Action functions
@@ -108,7 +116,7 @@ export class TodoService {
     const todoIdx = todos.findIndex(todo => todo._id === todoId)
     todos.splice(todoIdx, 1);
     this._todos$.next(todos) // update the db after modding.
-    utilService.save(this.KEY, todos);
+    UtilService.save(this._KEY, todos);
   }
 
   public save(todo: Todo): Observable<Todo> {
@@ -145,11 +153,10 @@ export class TodoService {
   private _add(todo: Todo): Observable<Todo> {
     console.log('entered _add in todo-service')
     const todos = this._todos$.getValue();
-    todo._id = utilService.makeId();
-    todo.category = 'general';
+    todo._id = UtilService.makeId();
     todos.push(todo);
-    utilService.save(this.KEY, todos);
-    console.log('load from local storage to check reading:', utilService.load(this.KEY))
+    UtilService.save(this._KEY, todos);
+    console.log('load from local storage to check reading:', UtilService.load(this._KEY))
     this._todos$.next(todos);
     return of(todo);
   }
@@ -160,7 +167,7 @@ export class TodoService {
     const todoIdx: number = todos.findIndex(_todo => _todo._id === todo._id);
     todos.splice(todoIdx, 1, todo);
     this._todos$.next(todos);
-    utilService.save(this.KEY, todos)
+    UtilService.save(this._KEY, todos)
     return of(todo);
   }
 
@@ -170,14 +177,14 @@ export class TodoService {
     console.log('category on _filter()', category);
     console.log('category on _filter()', category);
     var todoTemp: Todo[] = this._filterByTerm(todos, term)
-    console.log('todoTemp',todoTemp);
+    console.log('todoTemp', todoTemp);
     return this._filterByCat(todoTemp, category);
   }
-  private _filterByTerm(todos: Todo[], term: string): Todo[]{
+  private _filterByTerm(todos: Todo[], term: string): Todo[] {
     return todos.filter(todo => todo.title.toLocaleLowerCase().includes(term))
   }
-  private _filterByCat(todos: Todo[], category: string): Todo[]{
-    return category ? todos.filter(todo => todo.category === category) : todos;    
+  private _filterByCat(todos: Todo[], category: string): Todo[] {
+    return category ? todos.filter(todo => todo.category === category) : todos;
   }
 
   private _sortByTitle(todos: Todo[], isAscending: boolean): Todo[] {

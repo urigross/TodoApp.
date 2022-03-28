@@ -2,7 +2,10 @@ import { ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Todo } from 'src/app/models/todo.model';
+// Services
 import { TodoService } from 'src/app/services/todo.service';
+import { UtilService } from 'src/app/services/util.service';
+// Fontawesome
 import { faWindowClose } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
@@ -13,11 +16,13 @@ import { faWindowClose } from '@fortawesome/free-regular-svg-icons';
 })
 export class TodoEditComponent implements OnInit {
   constructor(private route: ActivatedRoute, private todoService: TodoService, private router: Router) { }
-  
+  //TODO: change this to initilize without empty todo
   todo: Todo = this.todoService.getEmptyTodo();
   subscription!: Subscription;
   errMsg: string ='';
-  importanceArr:string [] = ['1','2','3'];
+  selectedImortancy=1;
+  importanceArr:number[] = UtilService.getImportancyArray(10);
+  categories:string[] = this.todoService.getCategories();
   // FontAwesome icons
   faWindowClose = faWindowClose;
 
@@ -33,7 +38,6 @@ export class TodoEditComponent implements OnInit {
   }
   async onSave(){
     try{
-      console.log('Entered onSave() todo-edit.component with todo:',this.todo);
       await this.todoService.save(this.todo).toPromise();
       this.router.navigateByUrl('/')
     } catch (err){

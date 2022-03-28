@@ -13,7 +13,7 @@ export class TodoFilterComponent implements OnInit {
   
   public filterBy: FilterBy = {term:'', category:''};
   private subscription!: Subscription;
-  public categories: string[] = ['All','general','home','work'];
+  public categories: string[] = this.todoService.getFilterCategories();
   
   
   constructor(private todoService: TodoService) {
