@@ -1,8 +1,9 @@
-export const utilService = {
+export const UtilService = {
    load: loadFromStorage,
    save: saveToStorage,
    makeId,
-   getRandomColor
+   getRandomColor,
+   getImportancyArray
 }
 function loadFromStorage(key:string) {
   return JSON.parse(localStorage.getItem(key) || "[]")
@@ -27,4 +28,12 @@ function getRandomColor() {
       color += letters[Math.floor(Math.random() * 16)];
    }
    return color;
+}
+
+function getImportancyArray(maxNum:number): number[]{
+   let importancyArray: number [] = [];
+   for (let i = 0; i <= maxNum-1; i++) {
+      importancyArray.push(i+1);      
+   }
+   return importancyArray;
 }

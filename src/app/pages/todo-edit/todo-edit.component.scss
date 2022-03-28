@@ -1,12 +1,3 @@
-a{
-    // width: 26px;
-    // height: 26px;
-    // line-height: 23px;
-    // text-align: center;
-    // border: 1px solid rgb(128, 124, 116);
-    // background-color: rgb(49, 45, 45);
-    // font-size: smaller;    
-}
 @media(max-width:3000px) {
     form {
         border: solid 1px wheat;
@@ -20,21 +11,21 @@ a{
         font-size: 20px;
         line-height: 30px;
         gap: 40px;
-        .title-container{
+        .title-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            label{
+            gap: 20px;
+            label {
                 margin-bottom: 10px;
             }
-            input, small{
+            input,
+            small {
                 width: 550px;
             }
-            input{
+            input {
                 font-size: 16px;
                 padding: 0 10px;
             }
-            ::placeholder{
+             ::placeholder {
                 color: wheat;
                 opacity: 0.4;
             }
@@ -44,72 +35,78 @@ a{
                 padding: 0px;
             }
         }
-        .importance-container{
+        .importance-container {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
             width: 153px;
-            select{
+            select {
                 height: 22px;
             }
         }
-        .status-container{
+        .category-container {
+            label {
+                margin-right: 10px;
+            }
+        }
+        .status-container {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
             width: 153px;
-            select{
+            select {
                 height: 22px;
             }
-
         }
-        
-        .save-btn{
+        .save-btn {
             display: inline-block;
-            button{
+            button {
                 width: 153px;
                 height: 27px;
                 font-size: 16px;
                 border-radius: 4px;
             }
         }
-        input{
+        input {
             border-radius: 5px;
             height: 31px;
             border: none;
         }
     }
-
 }
 
-@media (max-width:960px){
-    form{
+@media (max-width:960px) {
+    form {
         width: 500px;
-        .title-container{
-            input, small{
+        .title-container {
+            input,
+            small {
                 width: 400px;
             }
         }
     }
 }
 
-@media (max-width:615px){
-    form{
+@media (max-width:615px) {
+    form {
         width: 400px;
-        .title-container{
-            input, small{
+        .title-container {
+            input,
+            small {
                 width: 350px;
+            }
+            label{
+                display: none;
             }
         }
     }
 }
 
-
 // Iphone 12 max
 @media(max-width:435px) {
-    form{
+    form {
         width: 380px;
         border: none;
     }
@@ -121,7 +118,8 @@ a{
         border: none;
         line-height: 40px;
         margin-bottom: 20px;
-        input, small {
+        input,
+        small {
             width: 255px;
         }
         .save-btn {
@@ -137,25 +135,27 @@ a{
 
 @media(max-width:330px) {
     form {
-        width: 310px ;
+        width: 310px;
         input {
             width: 220px;
         }
         .save-btn {
             margin-top: 5px;
         }
-        input{
+        input {
             margin-right: 0;
         }
     }
 }
+
 //Galaxy S9
 @media (max-width: 325px) {
-    form{
+    form {
         padding: 0;
         width: 310px;
-        .title-container{
-            input, small{
+        .title-container {
+            input,
+            small {
                 width: 270px;
             }
         }
