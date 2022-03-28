@@ -1,3 +1,5 @@
+// yoava: file naming, kebab-case
 export interface FilterBy{
-    term: string
+  term: string,
+  category: string
 }

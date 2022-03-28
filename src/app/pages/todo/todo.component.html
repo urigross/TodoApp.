@@ -1,18 +1,22 @@
 <section class="todo-app-container max-width">
-    <div class="upper-section">
-        <app-todo-filter></app-todo-filter>
-        <!-- add new Todo-->
-        <div class="add-todo-container">
-            <app-todo-edit [todo]="emptyTodo"></app-todo-edit>
-        </div>
-    </div>    <!-- filter -->
+    <!-- filter -->
+    <app-todo-filter></app-todo-filter>
+    <!-- upper btns set -->
+    <div class="upper-buttons-container">
+        <button class="drag-btn {{(isDraggble ? 'pressed' : '')}}" (click)="isDraggble=!isDraggble">Drag</button>
+        <a routerLink="/edit" class="add-btn"><fa-icon [icon]="faPlus"></fa-icon></a>
+    </div>
     <!-- sorting btns -->
     <div class="sort-btn-container">
-        <button class="content-btn" (click)="onToggleSort('title')">Content ↑↓</button>
-        <button class="date-btn" (click)="onToggleSort('date')">Date ↑↓</button>
-        <button class="status-btn" (click)="onToggleSort('isDone')">Status ↑↓</button>
-        <button class="importance-btn"(click)="onToggleSort('importance')">Level ↑↓</button>
+        <button class="content-btn" (click)="onToggleSort('title')">Content <fa-icon [icon]="faSort"></fa-icon></button>
+        <button class="date-btn" (click)="onToggleSort('date')">Date <fa-icon [icon]="faSort"></fa-icon></button>
+        <button class="status-btn" (click)="onToggleSort('isDone')">Status <fa-icon [icon]="faSort"></fa-icon></button>
+        <button class="importance-btn" (click)="onToggleSort('importance')">Lvl <fa-icon [icon]="faSort"></fa-icon></button>
     </div>
     <!-- todos -->
-    <app-todo-list [todos]="todos$ | async" (onIdToRemove)="onIdToRemove($event)"></app-todo-list>
+    <app-todo-list *ngIf="(todos$ | async)?.length !== 0 else loading" [todos]="todos$ | async" [isDraggble]="isDraggble" (onIdToRemove)="onIdToRemove($event)" 
+    (onToggleIsDone)="onToggleIsDone($event)"></app-todo-list>
+    <ng-template #loading>
+        <h2>You have nothing todo <fa-icon [icon]="faDizzy"></fa-icon></h2>
+    </ng-template>
 </section>

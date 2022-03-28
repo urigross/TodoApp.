@@ -1,7 +1,22 @@
-<section class="header max-width">
-    <h1>TodoApp</h1>
-    <nav>
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Todo App</a>
-        <a routerLink="/about" routerLinkActive="active">About</a>
-    </nav>
-</section>
+<nav>
+    <div class="nav-container max-width">
+        <div class="logo-container">
+            <h1 class="logo">Todo<span>App</span></h1>
+            <span class="logo-span">By Uri Gross</span>
+        </div>
+        <ul [ngClass]="mobileMenuOn?'active':''">
+            <li>
+                <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="onCloseMenu()">Todo<span>App</span></a>
+            </li>
+            <li>
+                <a routerLink="/about" routerLinkActive="active" (click)="onCloseMenu()">About</a>
+            </li>
+        </ul>
+        <div class="menu-btn">
+            <fa-icon [icon]="faTimes" *ngIf="mobileMenuOn; else closeMenuBtn" (click)="onCloseMenu()"></fa-icon>
+            <ng-template #closeMenuBtn>
+                <fa-icon [icon]="faBars" (click)="onOpenMenu()"></fa-icon>
+            </ng-template>
+        </div>
+    </div>
+</nav>

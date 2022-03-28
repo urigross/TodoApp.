@@ -1,5 +1,17 @@
-<div class="todo-list">
-    <app-todo-preview *ngFor="let todo of todos; index as idx; trackBy:trackByFn" [todo]="todo" 
-    (onIdToRemove)="onIdToRemove.emit($event)"></app-todo-preview>
+<!-- draggble -->
+<div class="{{isDraggble ? 'grabbing':''}}">
+    <div *ngIf="isDraggble; else nonDraggble" cdkDropList class="todo-list" (cdkDropListDropped)="drop($event)">
+        <div class="todo-box" *ngFor="let todo of todos; trackBy trackByFn" cdkDrag>
+            <div class="todo-custom-placeholder draggble"  *cdkDragPlaceholder></div>
+            <app-todo-preview [todo]="todo" [isDraggble]="isDraggble" class="draggble" (onIdToRemove)="onIdToRemove.emit($event)" (onToggleIsDone)="onToggleIsDone.emit($event)"></app-todo-preview>
+        </div>
+    </div>
+    <!-- non-draggble -->
+    <ng-template #nonDraggble>
+        <div class="todo-list">
+            <div class="todo-box" *ngFor="let todo of todos; trackBy trackByFn">
+                <app-todo-preview [todo]="todo" [isDraggble]="isDraggble" (onIdToRemove)="onIdToRemove.emit($event)" (onToggleIsDone)="onToggleIsDone.emit($event)"></app-todo-preview>
+            </div>
+        </div>
+    </ng-template>
 </div>
-

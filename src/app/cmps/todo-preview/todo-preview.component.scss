@@ -1,30 +1,57 @@
+.disabled{
+    pointer-events:none;
+}
 .todo-preview-container {
-    display: flex;
-    justify-content: flex-start;
-    gap: 35px;
-    .preview-ctr {
-        display: flex;
-        padding: 10px;
-        box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
-        border-radius: 4px;
-        background-color: #fff;
-        margin-bottom: 15px;
-        margin-top: 15px;
-        height: 47px;
-        line-height: 28px;
-    }
+    cursor: default;
     ul {
         font-size: 16px;
         display: flex;
         gap: 35px;
         margin-bottom: 30px;
     }
+    .preview-ctr {
+        display: flex;
+        padding: 10px;
+        box-shadow: 0 2px 2px rgb(0 0 0 / 20%);
+        border-radius: 4px;
+        background-color: rgb(49, 45, 45);
+        margin-bottom: 2px;
+        margin-top: 2px;
+        height: 47px;
+        line-height: 28px;
+        cursor: default;
+        .todo-preview {
+            a {
+                width: 350px;
+                color: inherit;
+                li {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+            .todo-date {
+                width: 250px;
+            }
+            .todo-status {
+                cursor: pointer;
+                width: 140px;
+                span {
+                    color: crimson;
+                }
+            }
+            .todo-importance {
+                width: 100px;
+            }
+        }
+    }
     button {
         width: 80px;
         height: 28px;
-    }
-    button::after {
-        content: "remove";
+        border: none;
+        font-size: 14px;
+        opacity: 0.5;
+        cursor: pointer;
     }
 }
 
@@ -32,24 +59,25 @@
     text-decoration: line-through;
 }
 
-.todo-content {
-    width: 350px;
-}
-
-.todo-date {
-    width: 250px;
-}
-
-.todo-status {
-    width: 140px;
-}
-
-.todo-importance {
-    width: 100px;
+@media (max-width:3000px) {
+    .todo-preview-container {
+        .preview-ctr {
+            .todo-preview {
+                .todo-importance {
+                    span::before {
+                        content: 'level:';
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width:1300px) {
     .todo-preview-container {
+        display: flex;
+        justify-content: flex-start;
+        gap: 35px;
         .preview-ctr {
             .todo-preview {
                 .todo-content {
@@ -66,12 +94,12 @@
 @media (max-width:900px) {
     .todo-preview-container {
         display: block;
-        .preview-ctr{
-            .todo-preview{
-                .todo-date{
+        .preview-ctr {
+            .todo-preview {
+                .todo-date {
                     display: none;
                 }
-                .todo-content{
+                .todo-content {
                     width: 378px;
                 }
             }
@@ -80,46 +108,77 @@
                 padding: 3px;
                 line-height: 15px;
             }
-            button::after {
-                content: "x";
-            }
         }
     }
-
 }
-
 
 @media (max-width:615px) {
     .todo-preview-container {
-        .preview-ctr{
-            .todo-preview{
-                .todo-content{
+        .preview-ctr {
+            .todo-preview {
+                .todo-content {
                     width: 269px;
                 }
             }
         }
     }
-
 }
 
 @media (max-width:500px) {
     .todo-preview-container {
-        .preview-ctr{
-            .todo-preview{
-                .todo-importance{
+        .preview-ctr {
+            .todo-preview {
+                .todo-importance {
                     width: 70px;
                 }
-                .todo-content
-                {
+                .todo-content {
                     width: 230px;
                 }
             }
         }
     }
-
 }
 
+@media (max-width: 385px) {
+    .todo-preview-container {
+        .preview-ctr {
+            margin-left: auto;
+            margin-right: auto;
+            width: 330px;
+            justify-content: center;
+            .todo-preview {
+                gap: 15px;
+                .todo-content {
+                    width: 175px;
+                }
+            }
+        }
+    }
+}
 
-@media (max-width:400px) {
+@media (max-width: 360px) {
+    .todo-preview-container {
+        .preview-ctr {
+            width: 350px;
+        }
+    }
+}
 
+@media (max-width: 325px) {
+    .todo-preview-container {
+        .preview-ctr {
+            width: 310px;
+            .todo-preview {
+                .todo-content {
+                    width: 178px;
+                }
+                .todo-importance{
+                    text-align: center;
+                    span{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
 }

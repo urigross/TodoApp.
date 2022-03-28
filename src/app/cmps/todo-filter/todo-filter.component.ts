@@ -1,28 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { FilterBy } from 'src/app/models/filterBy.model';
-import { TodoService } from 'src/app/services/todo.service';
+import {ChangeDetectionStrategy, Component, OnInit, Input} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {FilterBy} from 'src/app/models/filterBy.model';
+import {TodoService} from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-todo-filter',
   templateUrl: './todo-filter.component.html',
-  styleUrls: ['./todo-filter.component.scss']
+  styleUrls: ['./todo-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoFilterComponent implements OnInit {
-
-  public filterBy:FilterBy;
-  private subscription: Subscription;
-
-  constructor(private todoService: TodoService) { }
-  onSetFilter():void{
+  
+  public filterBy: FilterBy = {term:'', category:''};
+  private subscription!: Subscription;
+  public categories: string[] = this.todoService.getFilterCategories();
+  
+  
+  constructor(private todoService: TodoService) {
+  }
+  
+  //
+  onSetFilter(): void {
+    console.log('setfilterby:',this.filterBy)
     this.todoService.setFilter(this.filterBy)
   }
+
   ngOnInit(): void {
-    this.subscription = this.todoService.filterBy$.subscribe(filterBy=>{
+    this.subscription = this.todoService.filterBy$.subscribe(filterBy => {
       this.filterBy = filterBy;
     })
   }
-  ngOnDestroy(){
+
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

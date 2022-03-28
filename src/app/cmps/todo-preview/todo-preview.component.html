@@ -1,16 +1,20 @@
-<!-- detailed todo with edit btn -->
-<div class="todo-preview-container">
-    <div class="preview-ctr" *ngIf="isEditOff; else goEdit">
+<!-- todo preview with edit btn, remove btn, completed btn -->
+<!-- On draggble mode - Clicks are disabled -->
+<div class="todo-preview-container {{(isDraggble? 'disabled': '')}}">
+    <div class="preview-ctr">
         <ul class="todo-preview" class=" todo {{ (todo.isDone ? 'done' : '') }}">
-            <li class="todo-content" (click)="onClickToEdit()">{{todo.title}}</li>
-            <li class="todo-date">Created: {{todo.date | date:'short' }}</li>
-            <li class="todo-status" (click)="onMarkCompleted()">status: {{todo.isDone? "Done":"Active"}}</li>
-            <li class="todo-importance">Level: {{todo.importance}}</li>
+            <!-- edit routerlink -->
+            <a [routerLink]="['/edit/',todo._id]" class="todo-content">
+                <li>{{todo.title}}</li>
+            </a>
+            <li class="todo-date">Created: {{todo.date | dateDesc }}</li>
+            <!-- complete btn -->
+            <li (click)="ontoggleCompletedTodo()" class="todo-status">status: <span>{{todo.isDone ? "Done" : "Active"}}</span></li>
+            <a [routerLink]="['/edit/',todo._id]" class="todo-importance">
+                <li><span></span>{{todo.importance}}</li>
+            </a>
             <!-- remove btn -->
         </ul>
-        <button (click)="onIdToRemove.emit(todo._id)"></button>
+        <button (click)="onIdToRemove.emit(todo._id)"><fa-icon [icon]="faTrash"></fa-icon></button>
     </div>
-    <ng-template #goEdit>
-        <app-todo-edit [todo]="todo" (onCloseEdit)="onCloseEdit($event)"></app-todo-edit>
-    </ng-template>
 </div>
